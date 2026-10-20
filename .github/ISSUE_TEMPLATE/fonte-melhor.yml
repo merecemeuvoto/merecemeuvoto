@@ -1,0 +1,18 @@
+name: Fonte melhor
+description: Você conhece uma fonte primária ou mais recente para um fato já publicado.
+title: "[fonte] "
+labels: ["fonte", "triagem"]
+body:
+  - type: input
+    id: card
+    attributes:
+      label: Qual card
+    validations:
+      required: true
+  - type: textarea
+    id: fonte
+    attributes:
+      label: Fonte sugerida
+      description: Link e, se possível, o trecho exato.
+    validations:
+      required: true

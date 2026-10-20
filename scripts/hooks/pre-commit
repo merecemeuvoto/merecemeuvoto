@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Pré-commit do ¿Merece Meu Voto?: valida os dados de fatos tocados neste commit.
+# Instalação: scripts/instalar_hooks.sh (aponta core.hooksPath para scripts/hooks).
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+if git diff --cached --name-only --diff-filter=ACMR | grep -q '^dados/'; then
+  python3 scripts/validar_dados.py
+fi

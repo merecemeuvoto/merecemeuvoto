@@ -1,0 +1,150 @@
+/* Tokens provisórios da identidade visual. Mudar cor aqui muda o site inteiro. */
+:root {
+  --papel: #f6f1e7;
+  --creme: #ece4d4;
+  --tinta: #15130e;
+  --cafe: #8a4b1f;
+  --caramelo: #d9a066;
+  --pedra: #5f5a51;
+
+  --fonte-texto: var(--fonte-bitter), Georgia, "Times New Roman", serif;
+
+  --largura-leitura: 760px;
+  --gutter: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte-texto);
+  font-weight: 500;
+  line-height: 1.45;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--cafe);
+  text-underline-offset: 0.15em;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--caramelo);
+  outline-offset: 3px;
+}
+
+main {
+  flex: 1;
+  max-width: var(--largura-leitura);
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(32px, 8vh, 96px) var(--gutter) 48px;
+  position: relative;
+}
+
+.marca {
+  font-weight: 800;
+  font-size: clamp(20px, 2.4vw, 24px);
+  margin: 0 0 clamp(48px, 10vh, 120px);
+}
+
+.marca b {
+  color: var(--cafe);
+  font-weight: 800;
+}
+
+.marca a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: clamp(40px, 7.5vw, 88px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  margin: 0 0 32px;
+  max-width: 17ch;
+}
+
+h1 span {
+  color: var(--cafe);
+}
+
+h2 {
+  font-weight: 800;
+  font-size: clamp(26px, 3.6vw, 40px);
+  line-height: 1.05;
+  margin: 40px 0 16px;
+}
+
+p {
+  font-size: clamp(18px, 2.2vw, 22px);
+  max-width: 34ch;
+  margin: 0 0 20px;
+}
+
+.status {
+  margin-top: 48px;
+  font-size: 15px;
+  color: var(--pedra);
+}
+
+.status strong {
+  color: var(--cafe);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.anel {
+  position: absolute;
+  right: -60px;
+  top: clamp(40px, 8vh, 90px);
+  width: min(42vw, 300px);
+  height: auto;
+  pointer-events: none;
+}
+
+footer {
+  max-width: var(--largura-leitura);
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px var(--gutter) 28px;
+  font-size: 14px;
+  color: var(--pedra);
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .anel {
+    right: -90px;
+    top: 12px;
+    width: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .anel {
+    transition: transform 400ms ease-out;
+  }
+}

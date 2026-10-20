@@ -1,0 +1,25 @@
+name: Fato errado ou desatualizado
+description: Um card traz informação incorreta, incompleta ou desatualizada.
+title: "[fato] "
+labels: ["fato", "triagem"]
+body:
+  - type: input
+    id: card
+    attributes:
+      label: Qual card
+      description: O título do card ou o endereço da página.
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: O que está errado
+    validations:
+      required: true
+  - type: textarea
+    id: fonte
+    attributes:
+      label: Fonte que corrige
+      description: Link verificável (órgão oficial, veículo de imprensa, documento). Sem fonte, a correção não entra.
+    validations:
+      required: true

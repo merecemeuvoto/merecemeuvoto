@@ -1,0 +1,16 @@
+name: Bug no site
+description: Algo quebrou, não abre ou não funciona no celular.
+title: "[bug] "
+labels: ["bug", "triagem"]
+body:
+  - type: textarea
+    id: oque
+    attributes:
+      label: O que aconteceu
+    validations:
+      required: true
+  - type: input
+    id: onde
+    attributes:
+      label: Aparelho e navegador
+      placeholder: "ex.: Samsung Galaxy, Chrome; iPhone, Safari"

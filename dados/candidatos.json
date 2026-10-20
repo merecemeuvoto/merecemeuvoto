@@ -1,0 +1,15 @@
+{
+  "_nota": "Chaves usadas em dados/fatos.json. Nome como aparece na urna; a ordem na tela é alfabética pela chave, nunca por preferência.",
+  "flavio": {
+    "nome": "Flávio Bolsonaro",
+    "numero": "22",
+    "partido": "PL",
+    "fonte_registro": "https://divulgacandcontas.tse.jus.br/"
+  },
+  "lula": {
+    "nome": "Lula",
+    "numero": "13",
+    "partido": "PT",
+    "fonte_registro": "https://divulgacandcontas.tse.jus.br/"
+  }
+}

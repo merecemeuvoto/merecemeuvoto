@@ -1,0 +1,11 @@
+{
+  "_nota": "Chaves usadas em dados/fatos.json. Rótulo é o que o leitor vê. Acrescentar tema é commit feat(dados).",
+  "economia": { "rotulo": "Economia e emprego" },
+  "saude": { "rotulo": "Saúde" },
+  "educacao": { "rotulo": "Educação" },
+  "seguranca": { "rotulo": "Segurança pública" },
+  "meio-ambiente": { "rotulo": "Meio ambiente" },
+  "direitos": { "rotulo": "Direitos e cidadania" },
+  "trabalho": { "rotulo": "Trabalho e renda" },
+  "instituicoes": { "rotulo": "Instituições e democracia" }
+}

@@ -1,0 +1,19 @@
+# dependências e build
+node_modules/
+.next/
+out/
+# ambiente local — nunca commitar segredo; use .env.example como modelo
+.env
+.env.*
+!.env.example
+# vercel cli (link local)
+.vercel/
+# ruído
+__pycache__/
+*.pyc
+.DS_Store
+*.log
+# cache do TypeScript incremental
+*.tsbuildinfo
+# gerado pelo next dev, build e typegen — e o dev escreve caminhos diferentes dos outros dois
+next-env.d.ts
