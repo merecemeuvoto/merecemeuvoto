@@ -1,11 +1,40 @@
-/* Tokens provisórios da identidade visual. Mudar cor aqui muda o site inteiro. */
+/* Tokens da identidade visual — espelho do sistema de design, documentado em docs/identidade.md.
+   Mudar cor aqui muda o site inteiro. Prefixo público --mmv-; os nomes curtos no fim do bloco são
+   apelidos para o CSS que já existia. Valores da saída A3.3 (21/out/2026). */
 :root {
-  --papel: #f6f1e7;
-  --creme: #ece4d4;
-  --tinta: #15130e;
-  --cafe: #8a4b1f;
-  --caramelo: #d9a066;
-  --pedra: #5f5a51;
+  /* cor */
+  --mmv-papel: #f3e9d8;
+  --mmv-creme: #ebdfca;
+  --mmv-tinta: #15130e;
+  --mmv-cafe: #834a16;
+  --mmv-cafe-escuro: #753f09;
+  --mmv-leite: #d6b59e;
+  --mmv-pedra: #5a5348;
+  --mmv-linha: #dbcdb7;
+  --mmv-luz: #ffffff;
+
+  /* movimento */
+  --mmv-dur-toque: 150ms;
+  --mmv-dur-passo: 250ms;
+  --mmv-dur-cena: 600ms;
+  --mmv-curva: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* luz da janela (docs/simulacoes/luz-da-janela.html), fonte cortina: picos de branco translúcido
+     sobre mesa e papéis e sobre texto e ícones — 0,10 é o teto medido que mantém todos os pares de
+     texto acima de 4,5:1 —, e os multiplicadores do vai-vem. O tremor só vale para a fonte folhas. */
+  --mmv-luz-mesa-pico: 0.85;
+  --mmv-luz-texto-pico: 0.1;
+  --mmv-luz-velocidade: 1.3;
+  --mmv-luz-amplitude: 1.8;
+  --mmv-luz-tremor: 1;
+
+  /* apelidos do CSS existente */
+  --papel: var(--mmv-papel);
+  --creme: var(--mmv-creme);
+  --tinta: var(--mmv-tinta);
+  --cafe: var(--mmv-cafe);
+  --caramelo: var(--mmv-leite);
+  --pedra: var(--mmv-pedra);
 
   --fonte-texto: var(--fonte-bitter), Georgia, "Times New Roman", serif;
 
@@ -42,7 +71,7 @@ a {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid var(--caramelo);
+  outline: 3px solid var(--mmv-cafe);
   outline-offset: 3px;
 }
 
