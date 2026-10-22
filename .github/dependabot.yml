@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    commit-message:
+      prefix: "chore(deps)"
+    ignore:
+      # O Node do site é o 24 (engines e .nvmrc), o mesmo do Vercel; os tipos acompanham o runtime.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      # typescript-eslint ainda não suporta o TypeScript 7 (canônico, seção 13).
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+    groups:
+      producao:
+        dependency-type: "production"
+      desenvolvimento:
+        dependency-type: "development"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "ci(ci)"
+    groups:
+      actions:
+        patterns: ["*"]

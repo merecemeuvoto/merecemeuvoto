@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "exemplo-economia-000",
+    "candidato": "lula",
+    "tema": "economia",
+    "tipo": "dado",
+    "afirmacao": "Exemplo de card: substitua pelo primeiro fato real antes de publicar; este registro fica em rascunho e nunca aparece no site.",
+    "data": "2026-10",
+    "fontes": [
+      {
+        "titulo": "Exemplo de fonte — Divulgação de Candidaturas e Contas Eleitorais",
+        "url": "https://divulgacandcontas.tse.jus.br/",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-18",
+        "primaria": true
+      }
+    ],
+    "status": "rascunho",
+    "atualizado_em": "2026-10-18",
+    "nota_interna": "Apague este exemplo no primeiro commit de dados reais."
+  }
+]

@@ -9,6 +9,9 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Versão: S
 
 - Licenças: código sob AGPL-3.0-or-later (`LICENSE`), dados sob CC BY 4.0 (`dados/LICENSE`) e a
   fonte Bitter sob a SIL Open Font License 1.1 (`app/fonts/OFL.txt`).
+- Action `espelhar publico`: a cada push na `main` e a cada tag `v*`, espelha a árvore dos
+  bastidores, sem `docs/`, `.claude/`, `CLAUDE.md` e as Actions internas, no repositório
+  público, e `.vercelignore` com os mesmos caminhos internos.
 
 ### Mudado
 
