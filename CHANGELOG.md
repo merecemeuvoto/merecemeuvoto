@@ -7,11 +7,18 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Versão: S
 
 ### Adicionado
 
+- Tokens públicos com prefixo `--mmv-` em `app/globals.css`: cor, movimento e a luz da janela
+  (picos e vai-vem), espelhados em `docs/identidade.md`.
+- Simulação de referência da luz da janela em `docs/simulacoes/luz-da-janela.html`.
+
 - Licenças: código sob AGPL-3.0-or-later (`LICENSE`), dados sob CC BY 4.0 (`dados/LICENSE`) e a
   fonte Bitter sob a SIL Open Font License 1.1 (`app/fonts/OFL.txt`).
 
 ### Mudado
 
+- Paleta para a saída A3.3: papel `#F3E9D8`, creme `#EBDFCA`, café `#834A16`, café-escuro
+  `#753F09`, leite `#D6B59E` no lugar do caramelo, pedra `#5A5348`, linha `#DBCDB7`.
+- Anel de foco em café, no lugar do caramelo (2,0:1 sobre papel).
 - Aviso de IA da `/quem-faz` inclui a redação.
 
 ## [0.1.0-alpha.3] — 2026-10-19
