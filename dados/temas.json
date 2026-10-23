@@ -1,11 +1,55 @@
 {
-  "_nota": "Chaves usadas em dados/fatos.json. Rótulo é o que o leitor vê. Acrescentar tema é commit feat(dados).",
-  "economia": { "rotulo": "Economia e emprego" },
-  "saude": { "rotulo": "Saúde" },
-  "educacao": { "rotulo": "Educação" },
-  "seguranca": { "rotulo": "Segurança pública" },
-  "meio-ambiente": { "rotulo": "Meio ambiente" },
-  "direitos": { "rotulo": "Direitos e cidadania" },
-  "trabalho": { "rotulo": "Trabalho e renda" },
-  "instituicoes": { "rotulo": "Instituições e democracia" }
+  "_nota": "Chaves usadas em dados/fatos.json; cada chave é um caderno do comparador. Rótulo é o que o leitor vê; grupo é «plano» (o que a candidatura promete) ou «historico» (o que o candidato fez e disse); nota é o critério editorial do caderno, mostrado ao leitor — em caderno ainda sem trecho, é o contrato do que vai entrar. Acrescentar tema é commit feat(dados).",
+  "economia": {
+    "rotulo": "Economia",
+    "grupo": "plano"
+  },
+  "saude": {
+    "rotulo": "Saúde",
+    "grupo": "plano"
+  },
+  "educacao": {
+    "rotulo": "Educação",
+    "grupo": "plano"
+  },
+  "seguranca": {
+    "rotulo": "Segurança",
+    "grupo": "plano"
+  },
+  "meio-ambiente": {
+    "rotulo": "Meio ambiente e clima",
+    "grupo": "plano"
+  },
+  "geopolitica": {
+    "rotulo": "Relações exteriores",
+    "grupo": "plano"
+  },
+  "direitos": {
+    "rotulo": "Direitos e cidadania",
+    "grupo": "plano"
+  },
+  "instituicoes": {
+    "rotulo": "Instituições e democracia",
+    "grupo": "plano"
+  },
+  "justica": {
+    "rotulo": "Histórico na Justiça",
+    "grupo": "historico",
+    "nota": "Decisões e atos formais, com data e fonte, de 2017 a outubro de 2026, sobre investigações, denúncias, condenações, absolvições, anulações e arquivamentos envolvendo cada candidato — não parentes nem aliados. Cada marco tem fonte primária ou dois veículos independentes; o que não passou nessa régua saiu do ar até a conferência humana. Os contadores contam trechos, não processos: um mesmo caso pode render mais de um marco."
+  },
+  "trabalho": {
+    "rotulo": "Trabalho e projetos",
+    "grupo": "historico",
+    "nota": "Trajetória de trabalho, projetos e atuação em organizações e ações sociais de cada candidato, com data e fonte nomeada, em número igual por lado. Este caderno ainda não tem trechos: o critério acima é o que decide o que entra."
+  },
+  "falas": {
+    "rotulo": "Falas públicas",
+    "grupo": "historico",
+    "nota": "Falas públicas de cada candidato, com a frase literal, a data e a fonte nomeada, em número igual por lado, e o que ele fez depois: manteve, retratou ou intensificou. Este caderno ainda não tem trechos: o critério acima é o que decide o que entra."
+  },
+  "relacoes": {
+    "rotulo": "Relações",
+    "grupo": "historico",
+    "nota": "Vínculos documentados de cada candidato — cargo, nomeação, aliança pública ou parentesco —, positivos e negativos pelo mesmo critério, com data e fonte nomeada; condenação só com trânsito em julgado. Este caderno ainda não tem trechos: o critério acima é o que decide o que entra."
+  }
 }

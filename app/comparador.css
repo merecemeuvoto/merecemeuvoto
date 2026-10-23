@@ -1,0 +1,402 @@
+/* ¿Merece Meu Voto? — o comparador por cadernos: envelope, cadernos, régua, placar. Origem: estudo «Comparador por cadernos»
+   (docs/simulacoes, no repositório dos bastidores), alpha.9 de 23/out/2026; os tokens vêm de globals.css (prefixo --mmv-). */
+:root{
+  --cafe-escuro:var(--mmv-cafe-escuro); --leite:var(--mmv-leite); --linha:var(--mmv-linha); --curva:var(--mmv-curva);
+  --papel-nota:var(--mmv-papel-nota); --papel-caderno:var(--mmv-papel-caderno); --aviso:var(--mmv-aviso);
+  --raio:var(--mmv-raio); --raio-grande:var(--mmv-raio-grande); --cor-caderno:var(--cafe);
+}
+/* a tipografia da casa (p com 34ch e 18–22px, h2 com margem) não entra nos cadernos: aqui a escala é a do comparador */
+:is(.envelope, .comparador, .placar-tela, .dica-ia) :is(h1, h2, h3){margin:0; font-weight:800; line-height:1.15; text-wrap:balance; max-width:none}
+:is(.envelope, .comparador, .placar-tela, .dica-ia) p{margin:0; max-width:none; font-size:inherit}
+:is(.envelope, .comparador, .placar-tela, .dica-ia){line-height:1.5}
+:is(.envelope, .comparador, .placar-tela, .dica-ia) a{color:var(--cafe-escuro); text-decoration:underline; text-underline-offset:3px}
+
+/* ---------- os cadernos do comparador — parte compartilhada entre o estudo «Comparador por cadernos» (alpha.7) e a simulação
+   «Luz da Janela» (alpha.17). Camadas, nas duas casas: papel dos blocos (::before, z 0) sob a luz da mesa (z 1, só na simulação),
+   conteúdo em z 2, tooltips em z 3, capas dos cadernos em z 4, envelope em z 6. Os tokens de cor (--papel, --creme, --tinta, --cafe,
+   --cafe-escuro, --leite, --pedra, --linha, --papel-nota, --papel-caderno, --aviso, --raio, --raio-grande, --curva) vêm da casa.
+   alpha.9: o sininho de balcão abre o cardápio, que desliza da lateral; o caderno começa fechado, à direita, com a frase de
+   abertura à esquerda; «Próximo caderno» fecha o lado direito para a esquerda (contracapa «Em progresso»), revela a capa do
+   seguinte e a abre; «anterior» faz o espelho.
+   alpha.8: a marcação vira uma escolha por par, na régua do par; dois cadernos de plano a mais.
+   alpha.7: o envelope envolve os cadernos (kraft, ou pedra por teste); a marcação é uma lista empilhada nas margens externas no
+   computador e abaixo do texto no celular; a régua carrega o filtro; cada caderno tem capa que abre e folha que vira; o indicador de
+   IA explica ao toque, no lugar do aviso; abrir fonte às cegas pede confirmação. ---------- */
+button{font:inherit}
+.acao, .pontos button, .menu-botao, .escolha label, button.ponto.ia, .caderno-ia, .regua-filtro, .conta{-webkit-tap-highlight-color:transparent}
+svg.icone{width:1.1em; height:1.1em; flex:none; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.sr-only{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+[hidden]{display:none !important}
+
+/* o material do envelope: kraft por padrão; «pedra» é a variante de teste, com a cor pedra do sistema diluída no papel */
+:root{--envelope:#C9A97E; --envelope-escuro:#B8955F; --envelope-fibra:rgba(90,60,30,.07); --envelope-tinta:var(--tinta)}
+:root[data-envelope="pedra"]{--envelope:#ABA396; --envelope-escuro:#938A7B; --envelope-fibra:rgba(40,36,30,.07)}
+
+/* blocos de papel na mesa: o papel é o ::before (z 0); tudo que está dentro sobe para z 2 */
+.folha-mesa{position:relative}
+.folha-mesa::before{content:""; position:absolute; inset:0; z-index:0; background:var(--papel-nota); border-radius:var(--raio-grande);
+  box-shadow:0 1px 0 rgba(90,83,72,.1), 0 22px 44px -26px rgba(60,48,36,.6), inset 0 0 0 1px rgba(90,70,45,.1)}
+.folha-mesa > *{position:relative; z-index:2}
+
+/* os botões, em três níveis: cheia (um por tela), contorno e leve (texto com seta) */
+.acao{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:40px; padding:6px 14px; border-radius:var(--raio); border:1.5px solid var(--cafe);
+  background:transparent; color:var(--cafe-escuro); font-weight:800; font-size:14px; line-height:1.25; cursor:pointer; text-decoration:none; text-align:left}
+.acao:hover{background:var(--creme)}
+.acao.cheia{background:var(--cafe); color:var(--papel); border-color:var(--cafe)}
+.acao.cheia:hover{background:var(--cafe-escuro)}
+.acao.leve{border-color:transparent; color:var(--cafe-escuro); padding-left:8px; padding-right:8px}
+.acao.leve:hover{border-color:var(--linha); background:transparent}
+.acao .seta, .regua-filtro .seta{display:inline-block; width:8px; height:8px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(-45deg); flex:none}
+.acao .seta.volta{transform:rotate(135deg)}
+.acao .seta.baixo, .regua-filtro .seta.baixo{transform:rotate(45deg) translate(-1px, -1px); transition:transform .15s}
+.acao[aria-expanded="true"] .seta.baixo, .regua-filtro[aria-expanded="true"] .seta.baixo{transform:rotate(-135deg) translate(-2px, -2px)}
+@media (pointer: coarse){ .acao{min-height:44px} }
+
+/* o envelope: o material (kraft ou pedra) fica no ::before do envelope e no ::before do comparador, que desce por trás de todos os
+   cadernos e passa das laterais deles — os cadernos estavam guardados dentro dele. No alto, fixa, a aba do envelope com a faixa
+   listrada do correio e a etiqueta de endereço (papel-nota), onde moram o progresso, os pontos e o menu. */
+.envelope{position:sticky; top:calc(env(safe-area-inset-top, 0px) + var(--altura-barra, 0px)); z-index:6; display:grid; grid-template-columns:minmax(0, 1fr); padding:14px 14px 8px;
+  margin:0 -14px; border-radius:3px 3px 0 0}
+.envelope-papel{position:absolute; inset:0; z-index:0; border-radius:3px 3px 0 0; background:var(--envelope);
+  background-image:repeating-linear-gradient(97deg, var(--envelope-fibra) 0 1px, transparent 1px 6px), repeating-linear-gradient(-12deg, rgba(255,255,255,.05) 0 2px, transparent 2px 9px);
+  box-shadow:0 1px 0 rgba(90,83,72,.12), 0 14px 30px -18px rgba(60,48,36,.55), inset 0 -1px 0 rgba(60,45,30,.25)}
+.envelope-luz{position:absolute; inset:0; z-index:1; overflow:hidden; pointer-events:none; border-radius:3px 3px 0 0}
+.envelope-luz .copia{position:absolute}
+.envelope-luz .copia .cortina{inset:0}
+.envelope > .etiqueta-envelope{position:relative; z-index:2}
+.envelope::before{content:""; position:absolute; left:0; right:0; top:0; height:7px; z-index:2; border-radius:3px 3px 0 0;
+  background:repeating-linear-gradient(135deg, var(--cafe) 0 14px, var(--papel-nota) 14px 20px, var(--leite) 20px 34px, var(--papel-nota) 34px 40px)}
+.envelope::after{content:""; position:absolute; left:0; right:0; bottom:-12px; height:12px; pointer-events:none; z-index:2;
+  background:linear-gradient(to bottom, rgba(60,48,36,.22), rgba(60,48,36,0))}
+.etiqueta-envelope{display:grid; gap:8px; padding:10px 12px 8px; border-radius:var(--raio); background:var(--papel-nota); box-shadow:0 1px 2px rgba(60,48,36,.25), inset 0 0 0 1px rgba(90,70,45,.12)}
+.envelope-linha{display:grid; grid-template-columns:minmax(0, 1fr) auto; align-items:center; gap:6px 12px}
+.progresso{display:flex; align-items:center; gap:10px; min-width:0; font-size:14px; color:var(--pedra)}
+.progresso b{color:var(--tinta); font-size:15px}
+/* os cadernos, em dois grupos (plano · histórico), um ponto por caderno: no celular só o ícone, na cor do caderno; no mouse, ícone e nome */
+.pontos{display:flex; align-items:center; gap:4px 14px; min-width:0; overflow-x:auto; scrollbar-width:none; grid-column:1 / -1}
+.pontos::-webkit-scrollbar{display:none}
+.pontos .grupo{display:flex; align-items:center; gap:4px; flex:none}
+.pontos .grupo + .grupo{border-left:1px solid var(--linha); padding-left:10px}
+.pontos .grupo-nome{font-size:12px; font-weight:800; letter-spacing:.04em; color:var(--pedra); margin-right:4px; white-space:nowrap}
+.pontos button{position:relative; display:inline-flex; align-items:center; gap:6px; min-width:44px; min-height:44px; padding:4px 8px; border-radius:999px; border:1.5px solid transparent; background:transparent; color:var(--cor-caderno, var(--cafe)); cursor:pointer; font-size:14px; font-weight:800; flex:none}
+.pontos button .icone{width:22px; height:22px}
+.pontos button .nome{color:var(--pedra); display:none}
+.pontos button[aria-current="true"]{background:var(--papel-caderno); border-color:var(--cor-caderno)}
+.pontos button[aria-current="true"] .nome{color:var(--tinta)}
+.pontos button.feito::after{content:""; position:absolute; right:4px; top:4px; width:7px; height:7px; border-radius:50%; background:var(--cor-caderno)}
+.pontos button.vazio{opacity:.5}
+.pontos button.vazio .icone{stroke-dasharray:2 2}
+.pontos button:hover{border-color:var(--linha)}
+@media (min-width:720px){ .pontos{flex-wrap:wrap; overflow:visible} .pontos .grupo{flex-wrap:wrap} .pontos button .nome{display:inline} }
+/* o sininho de balcão: dourado por preenchimento; toca (balança) ao passar o mouse e abre o cardápio */
+.menu-botao{min-width:44px; min-height:44px; padding:0 8px; border-radius:var(--raio); border:1.5px solid var(--linha); background:transparent; color:var(--cafe-escuro); cursor:pointer; line-height:1; display:inline-grid; place-items:center}
+.menu-botao:hover, .menu-botao[aria-expanded="true"]{border-color:var(--cafe); background:var(--creme)}
+.menu-botao .icone{width:30px; height:30px; stroke:#8A6A1E; stroke-width:1.2; transform-origin:50% 90%}
+.menu-botao .sino-cupula{fill:#D9B86F} .menu-botao .sino-base{fill:#C9A553; stroke:#8A6A1E} .menu-botao .sino-botao{fill:#EAD2A0}
+.menu-botao .sino-haste{stroke-width:2} .menu-botao .sino-brilho{stroke:rgba(255,250,230,.85); stroke-width:1.4}
+.menu-botao:hover .icone{animation:tocar-sino .5s ease-in-out}
+@keyframes tocar-sino{0%{transform:rotate(0)} 25%{transform:rotate(-8deg)} 55%{transform:rotate(7deg)} 80%{transform:rotate(-3deg)} 100%{transform:rotate(0)}}
+/* o cardápio: uma folha que desliza da lateral direita — painel no computador, sobreposto no celular — sobre um fundo escurecido */
+.cardapio-fundo{position:fixed; inset:0; z-index:8; background:rgba(21,19,14,.32)}
+.menu.cardapio{position:fixed; top:0; right:0; bottom:0; z-index:9; width:min(360px, 88vw); display:grid; align-content:start; gap:2px; padding:14px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+  background:var(--papel-nota); box-shadow:-8px 0 30px -14px rgba(60,48,36,.6), inset 1px 0 0 rgba(90,70,45,.12); overflow-y:auto; animation:deslizar-cardapio .32s var(--curva) both}
+@keyframes deslizar-cardapio{from{transform:translateX(100%)} to{transform:translateX(0)}}
+.cardapio-cabeca{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:4px 0 10px; margin-bottom:6px; border-bottom:1px solid var(--linha)}
+.cardapio-titulo{font-size:19px; font-weight:800; display:inline-flex; align-items:baseline; gap:8px}
+.cardapio-titulo .sinal{color:var(--cafe)}
+.cardapio-titulo small{font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--pedra); white-space:nowrap}
+.menu .acao{justify-content:flex-start; width:100%; border-color:transparent; border-radius:0; border-bottom:1px dotted var(--linha); padding:10px 4px; min-height:46px}
+.menu .acao:hover{background:var(--creme)}
+.menu .acao small{font-weight:500; color:var(--pedra); margin-left:auto; padding-left:10px; text-align:right}
+/* «como funciona»: o texto que antes vivia no aviso, agora só a pedido */
+.explica{display:grid; gap:8px; padding:10px 12px; border-radius:var(--raio); background:var(--creme); font-size:14px; color:var(--pedra); max-width:72ch}
+.explica .acao{justify-self:start}
+/* a confirmação: uma tira de papel que se abre no lugar da ação, para o clique acidental não valer */
+.confirma{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; padding:10px 14px; border-radius:var(--raio); background:var(--creme); border-left:4px solid var(--cafe); font-size:14px}
+.confirma-acoes{display:flex; gap:8px}
+
+/* os retratos: enquanto as candidaturas estão ocultas, os sinais da marca — ¿ à esquerda, ? à direita —; ao revelar, a foto oficial */
+.retrato{position:relative; display:inline-grid; place-items:center; width:38px; height:50px; flex:none; border-radius:4px; background:var(--papel);
+  box-shadow:inset 0 0 0 1.5px rgba(131,74,22,.45), 0 2px 6px -3px rgba(60,48,36,.5); color:var(--cafe); font-weight:800; font-size:27px; line-height:1; overflow:hidden; font-variant-numeric:tabular-nums}
+.retrato.grande{width:64px; height:84px; font-size:46px}
+.retrato img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.retrato .numero{font-size:.55em}
+.retrato .legenda{position:absolute; left:0; right:0; bottom:0; font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:var(--pedra); background:rgba(243,233,216,.9); text-align:center; padding:2px 0; font-weight:800}
+
+/* o corpo do envelope desce por trás dos cadernos (::before, z 0), passando 14 px de cada lado e um pouco abaixo do último */
+.comparador{position:relative; display:grid; gap:26px; padding:14px 0 22px}
+.comparador::before{content:""; position:absolute; inset:-8px -14px 0; z-index:0; border-radius:0 0 var(--raio-grande) var(--raio-grande); background:var(--envelope);
+  background-image:repeating-linear-gradient(97deg, var(--envelope-fibra) 0 1px, transparent 1px 6px), repeating-linear-gradient(-12deg, rgba(255,255,255,.05) 0 2px, transparent 2px 9px);
+  box-shadow:0 1px 0 rgba(90,83,72,.1), 0 22px 44px -26px rgba(60,48,36,.6), inset 0 0 0 1px rgba(60,45,30,.18), inset 0 10px 14px -12px rgba(60,45,30,.55)}
+/* os cadernos: um por tema, aberto no meio; a lombada da esquerda leva a cor do caderno; o papel é o ::before */
+.caderno{position:relative; padding-left:7px; perspective:1200px; perspective-origin:50% 240px}
+.caderno::before{content:""; position:absolute; inset:0; z-index:0; background:var(--papel-caderno); border-radius:2px var(--raio-grande) var(--raio-grande) 2px; border-left:7px solid var(--cor-caderno);
+  box-shadow:0 1px 0 rgba(90,83,72,.1), 0 22px 44px -26px rgba(60,48,36,.6), inset 0 0 0 1px rgba(90,70,45,.1)}
+.caderno::after{content:""; position:absolute; top:0; bottom:0; left:calc(50% + 3px); width:28px; z-index:0; transform:translateX(-50%); pointer-events:none;
+  background:linear-gradient(90deg, rgba(60,48,36,0) 0%, rgba(60,48,36,.09) 42%, rgba(60,48,36,.16) 50%, rgba(60,48,36,.09) 58%, rgba(60,48,36,0) 100%)}
+.caderno > *{position:relative; z-index:2}
+.caderno-cabeca{display:grid; gap:10px; padding:16px 22px 10px}
+.caderno-cabeca h3{font-size:22px; display:inline-flex; align-items:center; gap:10px}
+.caderno-cabeca h3 .icone{width:26px; height:26px; color:var(--cor-caderno)}
+.caderno-cabeca h3 small{font-size:13px; font-weight:800; letter-spacing:.04em; color:var(--pedra)}
+.caderno-ia{display:inline-flex; align-items:center; gap:8px; font-size:14px; color:var(--pedra); background:transparent; border:none; padding:0; cursor:pointer; text-align:left; font-weight:500; border-radius:var(--raio)}
+.caderno-ia:hover{color:var(--tinta)}
+.ponto{width:8px; height:8px; border-radius:50%; background:var(--cafe); flex:none}
+.ponto.ia{background:var(--aviso)}
+/* o ponto laranja é um botão: toque ou clique abre a explicação do que «buscado por IA» quer dizer */
+button.ponto.ia{width:22px; height:22px; min-width:22px; border:none; padding:0; cursor:pointer; background:transparent; display:inline-grid; place-items:center; border-radius:50%}
+button.ponto.ia::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--aviso); box-shadow:0 0 0 3px rgba(166,76,27,.12)}
+button.ponto.ia:hover::before{box-shadow:0 0 0 5px rgba(166,76,27,.18)}
+/* as duas candidaturas do caderno: retrato pequeno e rótulo, lado a lado */
+.lados{display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:10px 16px}
+.lados .lado-nome{display:flex; align-items:center; gap:10px; min-width:0; font-size:15px; font-weight:800}
+.lados .lado-nome.lado-b{order:2}
+.caderno-nota{padding:0 22px 10px; font-size:14px; color:var(--pedra); max-width:80ch}
+/* caderno sem trecho: a nota é o contrato do que vai entrar; a página fica em branco, de propósito */
+.caderno.sem-trechos .caderno-nota{padding-bottom:18px}
+.caderno .em-branco{padding:18px 22px 26px; font-size:15px; color:var(--pedra); font-style:italic; border-top:1px dashed var(--linha)}
+/* o resumo numérico (só nos cadernos com contadores), dentro da régua: contadores simétricos que filtram os trechos do caderno */
+.resumo{display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr)}
+.resumo-lado{display:flex; flex-wrap:wrap; gap:4px 6px; padding:8px 14px; min-width:0}
+.resumo-lado.lado-b{order:2}
+.resumo-texto{display:block; font-size:13px; color:var(--pedra); padding:0 14px 6px; grid-column:1 / -1}
+.conta{position:relative; display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:3px 10px; border-radius:999px; border:1px solid var(--linha); background:var(--papel-nota); color:var(--pedra); font-size:14px; font-weight:800; cursor:pointer; font-variant-numeric:tabular-nums}
+.conta .icone{color:var(--cor-caderno)}
+.conta b{color:var(--tinta)}
+.conta:hover{border-color:var(--cor-caderno)}
+.conta[aria-pressed="true"]{background:var(--cor-caderno); border-color:var(--cor-caderno); color:var(--papel)}
+.conta[aria-pressed="true"] .icone, .conta[aria-pressed="true"] b{color:var(--papel)}
+.conta.zero{opacity:.55}
+.conta .dica{display:none; position:absolute; left:0; top:calc(100% + 8px); z-index:4; width:max-content; max-width:min(280px, calc(100vw - 48px)); padding:8px 11px; border-radius:var(--raio); background:var(--tinta); color:var(--papel); font-size:13px; font-weight:500; line-height:1.4; text-align:left; white-space:normal; pointer-events:none; box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+.conta:hover .dica, .conta:focus-visible .dica{display:block}
+.resumo-lado.lado-b .conta .dica{left:auto; right:0}
+.pares{display:grid; grid-template-columns:minmax(0, 1fr)}
+.par{position:relative; display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr)}
+.par + .par{border-top:1px dashed var(--linha)}
+/* o trecho: etiqueta, afirmação, lista de marcação, «Fonte ›» e os detalhes. No computador a lista vai para a margem externa da
+   página (A à esquerda, B à direita; trocam com «Trocar os lados»); no celular ela fica abaixo do texto, em linhas de largura cheia */
+.trecho{position:relative; display:grid; align-content:start; gap:10px; padding:18px 26px 20px; min-width:0; transition:background-color .2s, opacity .2s}
+.trecho > *{position:relative; z-index:2}
+.trecho.lado-b{order:2}
+.comparador.invertido .trecho.lado-a, .comparador.invertido .resumo-lado.lado-a, .comparador.invertido .vazio.lado-a, .comparador.invertido .lados .lado-nome.lado-a{order:2}
+.comparador.invertido .trecho.lado-b, .comparador.invertido .resumo-lado.lado-b, .comparador.invertido .vazio.lado-b, .comparador.invertido .lados .lado-nome.lado-b{order:1}
+.comparador.invertido .resumo-lado.lado-a .conta .dica{left:auto; right:0}
+.comparador.invertido .resumo-lado.lado-b .conta .dica{left:0; right:auto}
+/* a margem do caderno: a linha vertical de um caderno escolar, na cor do caderno */
+.trecho::before{content:""; position:absolute; top:14px; bottom:14px; left:14px; width:1px; background:var(--cor-caderno); opacity:.35}
+.par.ativo .trecho{background:rgba(255,255,255,.34)}
+.trecho.fora{opacity:.35}
+/* a etiqueta do trecho: o ponto laranja (buscado por IA, explica ao toque), quem, e — só quando importa — o tipo */
+.etiqueta{display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px; font-size:14px; color:var(--pedra); min-height:22px}
+.etiqueta .quem-curto{font-weight:800; color:var(--tinta)}
+.etiqueta .tipo{color:var(--cafe-escuro); font-weight:800}
+.etiqueta .tipo::before{content:"·"; margin-right:8px; color:var(--linha); font-weight:500}
+.trecho .afirmacao{font-size:17px; max-width:62ch}
+.trecho .contexto{font-size:14px; color:var(--pedra); max-width:68ch}
+.trecho .fonte{font-size:14px; color:var(--pedra); display:flex; flex-wrap:wrap; gap:4px 10px}
+.trecho .fonte a{color:var(--cafe-escuro)}
+.selo{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:800; color:var(--pedra); background:var(--creme); border-radius:999px; padding:5px 11px; width:auto; justify-self:start; max-width:100%; line-height:1.35}
+.selo .texto{min-width:0}
+.selo.ia{color:var(--aviso); background:rgba(166,76,27,.1)}
+.trecho .mais{justify-self:start}
+.trecho .detalhes{display:grid; gap:10px}
+.vazio{font-size:14px; color:var(--pedra); font-style:italic; padding:18px 26px; align-self:center}
+.vazio.lado-b{order:2}
+/* a régua do par: atravessa as duas páginas no pé do par e carrega a escolha — «¿qual pesa mais para você?» — com a candidatura
+   da esquerda à esquerda e a da direita à direita; a escolhida ganha a caixa cheia; nenhuma vem marcada */
+.regua-par{grid-column:1 / -1; order:3; position:relative; margin:0 0 2px; padding:12px 22px 10px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.36) 0%, rgba(255,255,255,.12) 55%, rgba(255,255,255,.22) 100%);
+  border-top:2px solid rgba(131,74,22,.5); border-bottom:2px solid rgba(131,74,22,.5); box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+.regua-par::before, .regua-par::after{content:""; position:absolute; left:0; right:0; height:6px; pointer-events:none;
+  background:repeating-linear-gradient(90deg, rgba(131,74,22,.5) 0 1px, transparent 1px 8px); background-repeat:no-repeat}
+.regua-par::before{top:0} .regua-par::after{bottom:0}
+.regua-par-vazia{font-size:14px; color:var(--pedra); font-style:italic}
+.escolha{border:none; margin:0; padding:0; min-width:0; display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; width:100%}
+.escolha .pergunta{float:left; font-size:15px; font-weight:800; color:var(--tinta); padding:0; margin-right:6px; flex:1 1 100%}
+.escolha label{position:relative; display:inline-flex; align-items:center; gap:8px; min-height:40px; padding:4px 12px 4px 8px; border-radius:999px; border:1.5px solid rgba(131,74,22,.35); background:var(--papel-nota); color:var(--pedra); font-size:14px; font-weight:800; cursor:pointer; transition:background-color .15s, color .15s, border-color .15s}
+@media (pointer: coarse){ .escolha label{min-height:44px} }
+.escolha label:hover{border-color:var(--cafe); color:var(--tinta)}
+.escolha input{position:absolute; inset:0; opacity:0; margin:0; cursor:pointer}
+.escolha .caixa{width:18px; height:18px; flex:none; border-radius:4px; border:1.5px solid var(--cafe); background:var(--papel); display:grid; place-items:center; transition:background-color .15s, border-color .15s}
+.escolha .caixa::after{content:""; width:5px; height:10px; border-right:2.5px solid var(--papel); border-bottom:2.5px solid var(--papel); transform:translateY(-1px) rotate(45deg); opacity:0}
+.escolha label:has(input:checked){background:var(--cafe); border-color:var(--cafe); color:var(--papel)}
+.escolha label.neutra:has(input:checked){background:var(--pedra); border-color:var(--pedra)}
+.escolha label:has(input:checked) .caixa{background:transparent; border-color:var(--papel)}
+.escolha label:has(input:checked) .caixa::after{opacity:1}
+.escolha label:has(input:focus-visible){outline:3px solid var(--cafe); outline-offset:2px}
+/* a ordem das opções segue os lados: a da esquerda, igual, a da direita, nenhuma; «Trocar os lados» inverte */
+.escolha .opcao-igual{order:2} .escolha .opcao-nenhuma{order:4}
+.comparador:not(.invertido) .escolha .lado-esq{order:1} .comparador:not(.invertido) .escolha .lado-dir{order:3}
+.comparador.invertido .escolha .lado-esq{order:3} .comparador.invertido .escolha .lado-dir{order:1}
+/* o pé do caderno: anterior e próximo, e no último, o placar */
+.caderno-pe{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; padding:14px 22px 18px; border-top:1px solid var(--linha)}
+.caderno-pe .proximo{margin-left:auto}
+
+/* a capa do caderno: tecido escuro na cor do caderno, dourado em relevo, o sinal da marca — só o gesto do documento, sem símbolo de
+   Estado. Fica fechada sobre o caderno (z 4) e abre para a esquerda ao entrar; ao sair, uma folha vira. */
+/* a capa e a contracapa são folhas de duas faces (transform-style preserve-3d): a capa tem o tecido na frente e o papel de guarda
+   atrás; a contracapa tem uma página na frente e, atrás, o tecido com o lema «Em progresso» — ou, ao voltar, a capa com o nome */
+.capa-caderno, .contracapa{position:absolute; top:0; left:0; right:0; height:min(100%, 92vh); z-index:4; border-radius:2px var(--raio-grande) var(--raio-grande) 2px; transform-origin:left center; transform-style:preserve-3d; pointer-events:none; display:none}
+.capa-caderno .face, .contracapa .face, .frase-abertura .molde{position:absolute; inset:0; border-radius:inherit; backface-visibility:hidden; -webkit-backface-visibility:hidden}
+.capa-caderno .face.verso, .contracapa .face.verso{transform:rotateY(180deg)}
+.tecido, .capa-caderno .face.frente, .contracapa .face.verso, .frase-abertura .molde{display:grid; align-content:start; justify-items:center; gap:14px; padding:clamp(72px, 22vh, 200px) 24px 40px; text-align:center;
+  background:color-mix(in srgb, var(--cor-caderno) 58%, #17140F);
+  background-image:repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 1px, transparent 1px 3px);
+  box-shadow:inset 0 0 0 1px rgba(255,220,150,.18), inset 0 0 0 10px color-mix(in srgb, var(--cor-caderno) 58%, #17140F), inset 0 0 0 11px rgba(214,181,120,.55), 0 20px 40px -20px rgba(0,0,0,.7)}
+.capa-caderno .face.verso{background:var(--papel-caderno); background-image:radial-gradient(ellipse at 50% 40%, rgba(255,255,255,.5), transparent 70%); box-shadow:inset 0 0 0 10px color-mix(in srgb, var(--cor-caderno) 58%, #17140F), inset 0 0 0 11px rgba(214,181,120,.4)}
+.contracapa .face.frente{background:var(--papel-caderno); background-image:linear-gradient(90deg, rgba(60,48,36,.14), transparent 14%); box-shadow:0 10px 30px -14px rgba(0,0,0,.6)}
+.contracapa .face.verso{align-content:center; padding-top:40px}
+.contracapa .face.verso.nome{display:none}
+.sinal-capa{font-size:54px; font-weight:800; line-height:1; color:#D9B86F; text-shadow:0 1px 0 rgba(255,240,200,.35), 0 -1px 0 rgba(0,0,0,.45)}
+.titulo-capa{font-size:13px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:#D9B86F; text-shadow:0 1px 0 rgba(255,240,200,.3), 0 -1px 0 rgba(0,0,0,.45)}
+.nome-capa{font-size:22px; font-weight:800; color:#EAD2A0; text-shadow:0 1px 0 rgba(255,240,200,.25), 0 -1px 0 rgba(0,0,0,.5)}
+.lema-capa{font-size:15px; font-weight:800; letter-spacing:.24em; text-transform:uppercase; color:#D9B86F; text-shadow:0 1px 0 rgba(255,240,200,.3), 0 -1px 0 rgba(0,0,0,.45)}
+.filete{width:64px; height:1px; background:rgba(217,184,111,.7)}
+.capa-caderno .face.verso{align-content:center; padding-top:40px}
+.capa-caderno .face.verso .sinal-capa{color:color-mix(in srgb, var(--cor-caderno) 40%, transparent); text-shadow:none; font-size:120px}
+/* a frase de abertura: a metade esquerda enquanto o caderno está fechado; vira molde (tecido de outro caderno) nas transições */
+.frase-abertura{display:none; position:relative; border-radius:var(--raio-grande) 2px 2px var(--raio-grande); overflow:hidden}
+.frase-abertura .frase{display:grid; align-content:center; height:100%; padding:28px clamp(22px, 4vw, 44px); font-size:clamp(17px, 1.9vw, 21px); line-height:1.45; color:var(--pedra); text-wrap:pretty}
+.frase-abertura .frase b{color:var(--tinta); font-weight:800}
+.frase-abertura .frase small{display:block; margin-top:14px; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--cafe-escuro)}
+.frase-abertura .molde{display:none; align-content:center; padding-top:40px}
+.frase-abertura.contracapa-anterior .frase, .frase-abertura.capa-seguinte .frase{display:none}
+.frase-abertura.contracapa-anterior .molde.lema, .frase-abertura.capa-seguinte .molde.nome{display:grid}
+/* FECHADO: o caderno começa como um livro fechado na metade direita; a frase ocupa a esquerda. Clicar na capa abre. */
+.caderno.fechado{display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); align-items:stretch; min-height:min(560px, 82vh)}
+.caderno.fechado > *{display:none}
+.caderno.fechado > .frase-abertura{display:block; grid-column:1; grid-row:1}
+.caderno.fechado > .capa-caderno{display:block; grid-column:2; grid-row:1; position:relative; top:auto; left:auto; right:auto; height:auto; min-height:100%; pointer-events:auto; cursor:pointer; animation:none; transform:none}
+.caderno.fechado > .capa-caderno::after{content:"Abrir"; position:absolute; left:50%; bottom:22px; transform:translateX(-50%); font-size:13px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#D9B86F; padding:8px 16px; border:1px solid rgba(217,184,111,.6); border-radius:999px}
+.caderno.fechado > .capa-caderno:hover::after{background:rgba(217,184,111,.14)}
+/* fechado de trás (ao voltar): a contracapa do caderno fica à esquerda, mostrando o lema; à direita, a capa do caderno seguinte (molde) */
+.caderno.fechado.tras > .capa-caderno{display:none}
+.caderno.fechado.tras > .contracapa{display:block; position:absolute; top:0; left:50%; right:auto; width:50%; height:100%; transform-origin:left center; transform:rotateY(-180deg); animation:none}
+.caderno.fechado.tras > .frase-abertura{grid-column:2; border-radius:2px var(--raio-grande) var(--raio-grande) 2px}
+/* ABRINDO: a capa vira da metade direita para a esquerda, pousa sobre a frase (ou sobre a contracapa anterior) e some; as folhas entram */
+.caderno.abrindo-livro > .capa-caderno{display:block; left:50%; right:auto; width:50%; z-index:5; animation:abrir-livro 1s ease-in-out both}
+@keyframes abrir-livro{0%{transform:rotateY(0deg)} 100%{transform:rotateY(-180deg)}}
+.caderno.abrindo-livro > .capa-caderno .face, .caderno.abrindo-livro.tras > .contracapa .face{animation:sumir-face 1s both}
+@keyframes sumir-face{0%{opacity:1} 86%{opacity:1} 100%{opacity:0}}
+.caderno.abrindo-livro > .frase-abertura{display:block; position:absolute; top:0; left:0; width:50%; height:min(100%, 92vh); z-index:3; animation:sumir-frase 1s ease-in both}
+@keyframes sumir-frase{0%{opacity:1} 70%{opacity:1} 100%{opacity:0}}
+.caderno.abrindo-livro > :not(.capa-caderno):not(.frase-abertura):not(.contracapa):not(.folha-virando){animation:folhas-abrindo 1s ease-out both}
+@keyframes folhas-abrindo{0%{opacity:.4} 55%{opacity:.4} 100%{opacity:1}}
+/* abrindo de trás: a contracapa (lema) da esquerda vira para a direita */
+.caderno.abrindo-livro.tras > .capa-caderno{display:none}
+.caderno.abrindo-livro.tras > .contracapa{display:block; left:50%; right:auto; width:50%; z-index:5; transform-origin:left center; animation:abrir-livro-tras 1s ease-in-out both}
+@keyframes abrir-livro-tras{0%{transform:rotateY(-180deg)} 100%{transform:rotateY(0deg)}}
+.caderno.abrindo-livro.tras > .frase-abertura{left:50%}
+/* FECHANDO: o lado direito fecha para a esquerda e mostra a contracapa com o lema; ao voltar, o lado esquerdo fecha para a direita e mostra a capa com o nome */
+.caderno.fechando > .contracapa{display:block; left:50%; right:auto; width:50%; z-index:5; animation:fechar-livro .8s ease-in-out both}
+@keyframes fechar-livro{0%{transform:rotateY(0deg)} 100%{transform:rotateY(-180deg)}}
+.caderno.fechando > :not(.contracapa):not(.capa-caderno):not(.frase-abertura):not(.folha-virando){animation:folhas-fechando .8s ease-in both}
+@keyframes folhas-fechando{0%{opacity:1} 100%{opacity:.3}}
+.caderno.fechando.tras > .contracapa{left:0; transform-origin:right center; animation:fechar-livro-tras .8s ease-in-out both}
+@keyframes fechar-livro-tras{0%{transform:rotateY(0deg)} 100%{transform:rotateY(180deg)}}
+.caderno.fechando.tras > .contracapa .face.verso.lema{display:none}
+.caderno.fechando.tras > .contracapa .face.verso.nome{display:grid}
+/* a abertura antiga (capa de largura inteira que gira para fora) fica para o celular e para o modo «todos» */
+.caderno.abrindo > .capa-caderno{display:block; animation:abrir-capa 1.2s ease-in-out both}
+@keyframes abrir-capa{0%{transform:rotateY(0deg); opacity:1} 18%{transform:rotateY(0deg); opacity:1} 90%{transform:rotateY(-94deg); opacity:1} 100%{transform:rotateY(-100deg); opacity:0}}
+.caderno.abrindo > :not(.capa-caderno):not(.contracapa):not(.frase-abertura){animation:folhas-abrindo 1.15s ease-out both}
+.folha-virando{position:absolute; top:0; left:0; right:0; height:min(100%, 92vh); z-index:5; border-radius:2px var(--raio-grande) var(--raio-grande) 2px; background:var(--papel-caderno); transform-origin:left center; backface-visibility:hidden; pointer-events:none; display:none;
+  box-shadow:0 10px 30px -14px rgba(0,0,0,.6); background-image:linear-gradient(90deg, rgba(60,48,36,.12), transparent 12%)}
+.caderno.virando .folha-virando{display:block; animation:virar-folha .5s ease-in both}
+@keyframes virar-folha{0%{transform:rotateY(0deg); opacity:1} 85%{transform:rotateY(-88deg); opacity:1} 100%{transform:rotateY(-96deg); opacity:0}}
+
+/* a régua transparente: acrílico com escala nas duas bordas; só no mouse e no teclado — no toque, fica o realce do par. A régua
+   carrega o filtro: nos cadernos com contadores, a alça «Filtrar» fica na ponta direita, e a régua presa no alto do caderno se abre
+   com os contadores dentro. */
+.regua{position:absolute; left:0; width:100%; top:0; height:0; z-index:2; opacity:0; pointer-events:none; border-radius:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.36) 0%, rgba(255,255,255,.12) 55%, rgba(255,255,255,.22) 100%);
+  border-top:2px solid rgba(131,74,22,.5); border-bottom:2px solid rgba(131,74,22,.5);
+  box-shadow:0 10px 22px -14px rgba(60,48,36,.55), inset 0 1px 0 rgba(255,255,255,.7);
+  transition:top .44s cubic-bezier(.22,.9,.3,1), height .44s cubic-bezier(.22,.9,.3,1), opacity .2s}
+.regua::before, .regua::after, .regua-presa::before, .regua-presa::after{content:""; position:absolute; left:0; right:0; height:11px;
+  background:repeating-linear-gradient(90deg, rgba(131,74,22,.55) 0 1px, transparent 1px 8px), repeating-linear-gradient(90deg, rgba(131,74,22,.7) 0 1px, transparent 1px 40px);
+  background-repeat:no-repeat}
+.regua::before, .regua-presa::before{top:0; background-size:100% 6px, 100% 11px; background-position:0 0, 0 0}
+.regua::after, .regua-presa::after{bottom:0; background-size:100% 6px, 100% 11px; background-position:0 100%, 0 100%}
+.regua.visivel{opacity:1}
+.regua-filtro, .regua-presa .regua-filtro{position:absolute; right:14px; top:50%; transform:translateY(-50%); z-index:3; pointer-events:auto; display:inline-flex; align-items:center; gap:6px; min-height:36px; padding:4px 12px; border-radius:999px; border:1.5px solid rgba(131,74,22,.5); background:var(--papel-nota); color:var(--cafe-escuro); font-size:13px; font-weight:800; cursor:pointer}
+.regua-filtro:hover{border-color:var(--cafe)}
+.regua.visivel .regua-filtro{pointer-events:auto}
+/* a régua presa: a mesma régua, parada no alto do caderno que tem filtro; no toque é a única; abre com os contadores dentro */
+.regua-presa{position:relative; margin:0 0 4px; min-height:40px; padding:11px 0;
+  background:linear-gradient(180deg, rgba(255,255,255,.36) 0%, rgba(255,255,255,.12) 55%, rgba(255,255,255,.22) 100%);
+  border-top:2px solid rgba(131,74,22,.5); border-bottom:2px solid rgba(131,74,22,.5); box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+.regua-presa .regua-filtro{top:20px}
+.regua-presa .regua-rotulo{display:block; padding:0 22px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:rgba(117,63,9,.75); line-height:18px}
+.regua-presa .regua-miolo{display:grid; padding-top:10px}
+.regua-presa .regua-miolo[hidden]{display:none}
+
+/* a dica do indicador de IA: um papelzinho preso embaixo da tela no celular, flutuante no computador */
+.dica-ia{position:fixed; z-index:7; left:max(16px, env(safe-area-inset-left, 0px)); right:max(16px, env(safe-area-inset-right, 0px)); bottom:calc(16px + env(safe-area-inset-bottom, 0px)); max-width:46ch; margin-left:auto; display:grid; gap:8px; padding:12px 14px; border-radius:var(--raio); background:var(--papel-nota); color:var(--pedra); font-size:14px;
+  box-shadow:0 1px 0 rgba(90,83,72,.1), 0 18px 40px -16px rgba(60,48,36,.7), inset 0 0 0 1px rgba(166,76,27,.3); border-left:4px solid var(--aviso)}
+.dica-ia p{display:flex; align-items:center; gap:8px}
+.dica-ia b{color:var(--aviso)}
+.dica-ia .acao{justify-self:start}
+
+/* a tela «Meu placar»: o ponto de chegada; só aparece no fim ou a pedido */
+.placar-tela{display:grid; gap:18px; padding:clamp(18px, 3vw, 28px)}
+.placar-tela .olho-placar{font-size:14px; color:var(--pedra)}
+.placar-tela h2{font-size:26px}
+.placar-tela h2 .sinal{color:var(--cafe)}
+.placar{display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:12px}
+.placar-lado{display:grid; grid-template-columns:auto minmax(0, 1fr); gap:4px 12px; align-items:center; padding:12px 14px; border-radius:var(--raio); background:var(--creme)}
+.placar-lado .retrato{grid-row:1 / span 3}
+.placar-lado h3, .placar-lado .saldo, .placar-lado .contagem, .placar-lado .barra-placar{grid-column:2}
+.placar-lado h3{font-size:16px; line-height:1.2}
+.placar-lado .saldo{font-size:15px; color:var(--pedra)}
+.placar-lado .saldo b{font-size:24px; color:var(--tinta); font-variant-numeric:tabular-nums}
+.placar-meio{grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:4px 16px; font-size:14px; color:var(--pedra); font-variant-numeric:tabular-nums; padding:0 4px}
+.placar-meio b{color:var(--tinta)}
+.placar-lado .saldo b{font-size:22px}
+.contagem{display:flex; flex-wrap:wrap; gap:2px 12px; font-size:14px; color:var(--pedra); font-variant-numeric:tabular-nums}
+.contagem b{color:var(--tinta)}
+.barra-placar{height:7px; border-radius:999px; background:var(--papel-nota); overflow:hidden; display:flex}
+.barra-placar i{display:block; height:100%; transition:width .35s var(--curva)}
+.barra-placar .favor{background:var(--cafe)}
+.barra-placar .contra{background:var(--pedra)}
+.barra-placar .nao-pesa{background:var(--leite)}
+.por-caderno{width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums}
+.por-caderno th, .por-caderno td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--linha)}
+.por-caderno th{font-weight:800; color:var(--pedra); font-size:13px}
+.por-caderno td.num, .por-caderno th.num{text-align:right}
+.por-caderno td .icone{color:var(--cor-caderno); margin-right:6px; vertical-align:-2px}
+.placar-tela .nota{font-size:14px; color:var(--pedra)}
+.placar-acoes{display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center}
+
+@media (max-width:720px){
+  /* no celular não há metades: a frase fica em cima e a capa fechada embaixo, de largura inteira; as viradas são no lugar, pelo meio */
+  .caderno.fechado{grid-template-columns:minmax(0, 1fr); min-height:0}
+  .caderno.fechado > .frase-abertura{grid-column:1; grid-row:1; border-radius:var(--raio-grande) var(--raio-grande) 2px 2px}
+  .caderno.fechado > .capa-caderno{grid-column:1; grid-row:2; min-height:min(420px, 56vh)}
+  .caderno.fechado.tras > .contracapa{position:relative; grid-column:1; grid-row:2; top:auto; left:auto; width:auto; height:auto; min-height:min(420px, 56vh); transform-origin:50% 50%}
+  .caderno.fechado.tras > .frase-abertura{grid-column:1; grid-row:1}
+  .caderno.fechado .frase-abertura .frase{padding:22px 20px 18px}
+  .caderno.abrindo-livro > .capa-caderno, .caderno.abrindo-livro.tras > .contracapa, .caderno.fechando > .contracapa, .caderno.fechando.tras > .contracapa{left:0; width:100%; transform-origin:50% 50%}
+  .caderno.abrindo-livro > .frase-abertura{display:none}
+  .par{grid-template-columns:minmax(0, 1fr)}
+  .caderno::after{display:none}
+  .resumo{grid-template-columns:minmax(0, 1fr)}
+  .resumo-lado + .resumo-lado{border-top:1px dashed var(--linha)}
+  .conta .dica{position:fixed; left:max(16px, env(safe-area-inset-left, 0px)); right:max(16px, env(safe-area-inset-right, 0px)); top:auto; bottom:calc(16px + env(safe-area-inset-bottom, 0px)); width:auto; max-width:none}
+  .trecho + .trecho{border-top:1px dotted var(--linha)}
+  .trecho{padding:16px 18px 18px}
+  .caderno-cabeca{padding:14px 18px 8px}
+  .caderno-nota{padding-left:18px; padding-right:18px}
+  .caderno-pe{padding:12px 18px 16px}
+  .envelope{padding:12px 12px 8px; margin:0 -12px}
+  .comparador::before{inset:-8px -12px 0}
+  .placar{grid-template-columns:minmax(0, 1fr)}
+  .dica-ia{max-width:none}
+}
+@media (prefers-reduced-motion: reduce){
+  .regua, .barra-placar i, .trecho, .escolha label, .escolha .caixa, .conta .dica, .acao .seta{transition:none}
+  .caderno.abrindo .capa-caderno, .caderno.abrindo > :not(.capa-caderno), .caderno.virando .folha-virando{animation:none}
+  .caderno.abrindo .capa-caderno{display:none}
+  .menu-botao:hover .icone, .menu.cardapio{animation:none}
+}
+:root[data-pausado="sim"] .regua, :root[data-pausado="sim"] .barra-placar i, :root[data-pausado="sim"] .acao .seta, :root[data-pausado="sim"] .escolha label{transition:none}

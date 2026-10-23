@@ -12,6 +12,13 @@
   --mmv-pedra: #5a5348;
   --mmv-linha: #dbcdb7;
   --mmv-luz: #ffffff;
+  --mmv-papel-nota: #f8f1e3; /* folha sobre a mesa (placar, capa) */
+  --mmv-papel-caderno: #f6eddc; /* página do caderno */
+  --mmv-aviso: #a64c1b; /* o ponto de IA: 4,5:1 sobre o papel */
+
+  /* forma */
+  --mmv-raio: 6px;
+  --mmv-raio-grande: 8px;
 
   /* movimento */
   --mmv-dur-toque: 150ms;
@@ -162,6 +169,128 @@ footer {
   gap: 16px;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+/* a página inicial com o comparador: mais larga que a leitura corrida */
+main.largo {
+  max-width: 1040px;
+  padding-top: 16px;
+}
+
+main.largo .marca {
+  margin-bottom: 0;
+}
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 0 0 20px;
+}
+
+/* a capa: a pergunta da marca, uma linha e um botão — a primeira tela diz o que fazer */
+.capa {
+  padding: clamp(18px, 3vw, 28px);
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  margin-bottom: 20px;
+}
+
+.capa h1 {
+  font-size: clamp(28px, 4.6vw, 40px);
+  line-height: 1.15;
+  margin: 0;
+  max-width: none;
+}
+
+.capa p {
+  font-size: 17px;
+  max-width: 48ch;
+  color: var(--pedra);
+  margin: 0;
+}
+
+.capa .acao {
+  margin-top: 4px;
+}
+
+.lema {
+  font-size: 15px;
+  color: var(--pedra);
+  margin: 0;
+  max-width: none;
+}
+
+/* o carimbo BETA: tinta de carimbo de escritório, torto de propósito; abre a nota ao toque */
+.carimbo {
+  position: relative;
+  font-size: 13px;
+}
+
+.carimbo summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px 9px 2px;
+  border: 2px solid var(--mmv-aviso);
+  border-radius: 4px;
+  color: var(--mmv-aviso);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+  box-shadow: inset 0 0 0 1px rgba(246, 241, 231, 0.6);
+  -webkit-mask-image: radial-gradient(ellipse at 30% 40%, #000 60%, rgba(0, 0, 0, 0.75) 100%);
+  mask-image: radial-gradient(ellipse at 30% 40%, #000 60%, rgba(0, 0, 0, 0.75) 100%);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.carimbo summary::-webkit-details-marker {
+  display: none;
+}
+
+.carimbo summary:hover {
+  background: rgba(166, 76, 27, 0.08);
+}
+
+.carimbo[open] summary {
+  transform: rotate(-3deg);
+}
+
+.carimbo .nota-carimbo {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  z-index: 8;
+  width: min(340px, calc(100vw - 48px));
+  padding: 12px 14px;
+  border-radius: var(--mmv-raio);
+  background: var(--mmv-papel-nota);
+  box-shadow: 0 1px 0 rgba(90, 83, 72, 0.1), 0 22px 44px -26px rgba(60, 48, 36, 0.6), inset 0 0 0 1px rgba(90, 70, 45, 0.1);
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--tinta);
+  display: grid;
+  gap: 8px;
+}
+
+.carimbo .nota-carimbo p {
+  margin: 0;
+  max-width: none;
+  font-size: 14px;
+}
+
+.carimbo .nota-carimbo b {
+  color: var(--mmv-aviso);
+}
+
+footer .lema-rodape {
+  flex: 1 1 100%;
+  font-style: italic;
 }
 
 @media (max-width: 600px) {

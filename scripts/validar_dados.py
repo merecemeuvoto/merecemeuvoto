@@ -25,11 +25,22 @@ RE_ID = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 RE_DATA = re.compile(r"^\d{4}-\d{2}(-\d{2})?$")
 RE_DIA = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 TIPOS = {"feito", "promessa", "posicao", "dado"}
-STATUS = {"rascunho", "publicado", "retirado"}
+# beta = buscado e revisado por IA, no ar com o carimbo e sem conferência humana (convenções, seção 6).
+STATUS = {"rascunho", "beta", "publicado", "retirado"}
+NO_AR = {"beta", "publicado"}
 CAMPOS_OBRIGATORIOS = ["id", "candidato", "tema", "tipo", "afirmacao", "data", "fontes", "status", "atualizado_em"]
-CAMPOS_PERMITIDOS = set(CAMPOS_OBRIGATORIOS) | {"contexto", "nota_interna"}
+CAMPOS_PERMITIDOS = set(CAMPOS_OBRIGATORIOS) | {
+    "contexto", "nota_interna", "conferido_por", "conferido_em",
+    "ordem", "etiqueta", "tags", "revisado_por", "buscado_em",
+}
+# Conferência humana (convenções, seção 6): fato publicado diz quem o conferiu na fonte e quando.
+CAMPOS_CONFERENCIA = ("conferido_por", "conferido_em")
 CAMPOS_FONTE = {"titulo", "url", "veiculo", "acessado_em"}
-CAMPOS_FONTE_PERMITIDOS = CAMPOS_FONTE | {"primaria"}
+CAMPOS_FONTE_PERMITIDOS = CAMPOS_FONTE | {"primaria", "anonimo"}
+RE_TAG = RE_ID
+TAMANHO_AFIRMACAO = (20, 800)
+TAMANHO_CONTEXTO = 600
+TAMANHO_ETIQUETA = 40
 
 # Neutralidade: palavras que pedem voto ou qualificam o candidato não entram em
 # afirmacao nem em contexto. A lista é mínima de propósito — reprova o óbvio; o resto é revisão.
@@ -95,16 +106,27 @@ def validar_fato(fato, i: int, candidatos: dict, temas: dict, hoje: date, erros:
         erros.append(f"{rotulo}: status «{fato.get('status')}» fora de {sorted(STATUS)} (esquema)")
 
     afirmacao = fato.get("afirmacao")
-    if not isinstance(afirmacao, str) or not (20 <= len(afirmacao) <= 280):
-        erros.append(f"{rotulo}: afirmacao precisa ter entre 20 e 280 caracteres (esquema)")
+    minimo, maximo = TAMANHO_AFIRMACAO
+    if not isinstance(afirmacao, str) or not (minimo <= len(afirmacao) <= maximo):
+        erros.append(f"{rotulo}: afirmacao precisa ter entre {minimo} e {maximo} caracteres (esquema)")
     contexto = fato.get("contexto", "")
-    if contexto and (not isinstance(contexto, str) or len(contexto) > 600):
-        erros.append(f"{rotulo}: contexto é texto de até 600 caracteres (esquema)")
+    if contexto and (not isinstance(contexto, str) or len(contexto) > TAMANHO_CONTEXTO):
+        erros.append(f"{rotulo}: contexto é texto de até {TAMANHO_CONTEXTO} caracteres (esquema)")
     for texto, nome in ((afirmacao, "afirmacao"), (contexto, "contexto")):
         if isinstance(texto, str):
             for padrao in RE_VEDADAS:
                 if padrao.search(texto):
                     erros.append(f"{rotulo}: «{nome}» contém expressão vedada «{padrao.pattern}» — pedido de voto ou qualificação do candidato (neutralidade)")
+
+    etiqueta = fato.get("etiqueta")
+    if "etiqueta" in fato and (not isinstance(etiqueta, str) or not (1 <= len(etiqueta) <= TAMANHO_ETIQUETA)):
+        erros.append(f"{rotulo}: etiqueta é texto curto de até {TAMANHO_ETIQUETA} caracteres (esquema)")
+    tags = fato.get("tags")
+    if "tags" in fato and (not isinstance(tags, list) or not all(isinstance(t, str) and RE_TAG.match(t) for t in tags)):
+        erros.append(f"{rotulo}: tags é lista de slugs minúsculos-com-hifens (esquema)")
+    ordem = fato.get("ordem")
+    if "ordem" in fato and (not isinstance(ordem, int) or isinstance(ordem, bool) or ordem < 1):
+        erros.append(f"{rotulo}: ordem é inteiro a partir de 1 (esquema)")
 
     data_fato = fato.get("data")
     if not isinstance(data_fato, str) or not data_valida(data_fato):
@@ -140,10 +162,76 @@ def validar_fato(fato, i: int, candidatos: dict, temas: dict, hoje: date, erros:
                 erros.append(f"{rf}: acessado_em no futuro (fontes)")
             if "primaria" in fonte and not isinstance(fonte["primaria"], bool):
                 erros.append(f"{rf}: primaria é booleano (fontes)")
+            if "anonimo" in fonte and (not isinstance(fonte["anonimo"], str) or len(fonte["anonimo"]) < 5):
+                erros.append(f"{rf}: anonimo é o título da fonte sem nome de candidato, com 5 caracteres ou mais (fontes)")
+        # Régua do que vai ao ar (convenções, seção 6): fonte primária, ou dois veículos independentes.
+        if fato.get("status") in NO_AR:
+            objetos = [f for f in fontes if isinstance(f, dict)]
+            primaria = any(f.get("primaria") is True for f in objetos)
+            veiculos = {str(f.get("veiculo", "")).strip().lower() for f in objetos if f.get("veiculo")}
+            if not primaria and len(veiculos) < 2:
+                erros.append(f"{rotulo}: fato no ar precisa de fonte primária ou de dois veículos independentes (fontes)")
 
-    if fato.get("status") == "publicado" and isinstance(fid, str) and fid.startswith("exemplo-"):
-        erros.append(f"{rotulo}: registro de exemplo não pode ser publicado (esquema)")
+    conferido_por = fato.get("conferido_por")
+    if "conferido_por" in fato and (not isinstance(conferido_por, str) or not conferido_por.strip()):
+        erros.append(f"{rotulo}: conferido_por é o nome de quem conferiu (conferência)")
+    conferido_em = fato.get("conferido_em")
+    if "conferido_em" in fato:
+        if not isinstance(conferido_em, str) or not data_valida(conferido_em, so_dia=True):
+            erros.append(f"{rotulo}: conferido_em precisa ser AAAA-MM-DD válida (conferência)")
+        elif date.fromisoformat(conferido_em) > hoje:
+            erros.append(f"{rotulo}: conferido_em no futuro (conferência)")
+        elif isinstance(atualizado, str) and data_valida(atualizado, so_dia=True) and conferido_em < atualizado:
+            erros.append(f"{rotulo}: conferido_em antes de atualizado_em — a conferência vale para o texto atual (conferência)")
+    if fato.get("status") == "publicado":
+        for campo in CAMPOS_CONFERENCIA:
+            if campo not in fato:
+                erros.append(f"{rotulo}: fato publicado sem «{campo}» — só vai ao ar conferido por uma pessoa (conferência)")
+
+    # Beta (convenções, seção 6): buscado e revisado por IA, com a data da busca; conferido vira publicado.
+    revisado_por = fato.get("revisado_por")
+    if "revisado_por" in fato and (not isinstance(revisado_por, str) or not revisado_por.strip()):
+        erros.append(f"{rotulo}: revisado_por é texto («ia» no beta) (beta)")
+    buscado_em = fato.get("buscado_em")
+    if "buscado_em" in fato:
+        if not isinstance(buscado_em, str) or not data_valida(buscado_em, so_dia=True):
+            erros.append(f"{rotulo}: buscado_em precisa ser AAAA-MM-DD válida (beta)")
+        elif date.fromisoformat(buscado_em) > hoje:
+            erros.append(f"{rotulo}: buscado_em no futuro (beta)")
+    if fato.get("status") == "beta":
+        if "buscado_em" not in fato:
+            erros.append(f"{rotulo}: fato beta sem «buscado_em» — o carimbo mostra quando a IA buscou (beta)")
+        if revisado_por != "ia":
+            erros.append(f"{rotulo}: fato beta leva «revisado_por»: «ia» — o leitor vê que ninguém conferiu ainda (beta)")
+        for campo in CAMPOS_CONFERENCIA:
+            if campo in fato:
+                erros.append(f"{rotulo}: fato beta com «{campo}» — conferido por uma pessoa, o status é publicado (beta)")
+
+    # Leitura às cegas (convenções, seção 7): o texto no ar não entrega de quem se fala.
+    if fato.get("status") in NO_AR:
+        textos = [(afirmacao, "afirmacao"), (contexto, "contexto")]
+        if isinstance(fontes, list):
+            textos += [(f.get("anonimo"), f"fonte[{j}].anonimo") for j, f in enumerate(fontes) if isinstance(f, dict)]
+        for texto, nome in textos:
+            if not isinstance(texto, str):
+                continue
+            for chave, cand in candidatos.items():
+                for palavra in nomes_reveladores(cand):
+                    if re.search(rf"(?<![\w-]){re.escape(palavra)}(?![\w-])", texto, re.IGNORECASE):
+                        erros.append(f"{rotulo}: «{nome}» cita «{palavra}», que entrega a candidatura {chave} na leitura às cegas (neutralidade)")
+
+    if fato.get("status") in NO_AR and isinstance(fid, str) and fid.startswith("exemplo-"):
+        erros.append(f"{rotulo}: registro de exemplo não pode ir ao ar (esquema)")
     return fid if isinstance(fid, str) else None
+
+
+def nomes_reveladores(cand) -> list[str]:
+    """Palavras do nome e o partido do candidato, com quatro letras ou mais (o número e siglas curtas dão falso positivo)."""
+    if not isinstance(cand, dict):
+        return []
+    palavras = re.findall(r"[^\W\d_]+", str(cand.get("nome", "")))
+    palavras += [str(cand.get("partido", ""))]
+    return [p for p in palavras if len(p) >= 4]
 
 
 def validar(raiz: Path, hoje: date | None = None) -> list[str]:

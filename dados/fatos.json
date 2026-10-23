@@ -1,22 +1,1101 @@
 [
   {
-    "id": "exemplo-economia-000",
-    "candidato": "lula",
+    "id": "flavio-economia-001",
+    "candidato": "flavio",
     "tema": "economia",
-    "tipo": "dado",
-    "afirmacao": "Exemplo de card: substitua pelo primeiro fato real antes de publicar; este registro fica em rascunho e nunca aparece no site.",
-    "data": "2026-10",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê estabilizar e reduzir a dívida pública; segundo o documento, isso criaria condições para juros básicos na média internacional e inflação no centro da meta.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O plano atribui os juros altos ao crescimento da dívida pública. O trecho não fixa prazo.",
+    "data": "2026-08",
     "fontes": [
       {
-        "titulo": "Exemplo de fonte — Divulgação de Candidaturas e Contas Eleitorais",
-        "url": "https://divulgacandcontas.tse.jus.br/",
+        "titulo": "Plano de governo de {nome} — p. 33",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=33",
         "veiculo": "TSE",
-        "acessado_em": "2026-10-18",
+        "acessado_em": "2026-10-21",
         "primaria": true
       }
     ],
-    "status": "rascunho",
-    "atualizado_em": "2026-10-18",
-    "nota_interna": "Apague este exemplo no primeiro commit de dados reais."
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-economia-001",
+    "candidato": "lula",
+    "tema": "economia",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê conservar o arcabouço fiscal hoje em vigor; segundo o documento, isso criaria condições para uma redução sustentada dos juros, com inflação controlada.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O plano apresenta o arcabouço fiscal em vigor, aprovado pelo Congresso, como o instrumento que controlou o crescimento das despesas. O trecho não fixa prazo.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 49",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=49",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-21",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-economia-002",
+    "candidato": "flavio",
+    "tema": "economia",
+    "ordem": 2,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê revisar e redimensionar a reforma tributária em curso e reduzir o IVA, que o documento diz estar projetado num dos patamares mais altos do mundo.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O trecho fala em corrigir distorções da reforma, sem dizer quais, e não fixa prazo nem alíquota.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 30",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=30",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-economia-002",
+    "candidato": "lula",
+    "tema": "economia",
+    "ordem": 2,
+    "tipo": "posicao",
+    "etiqueta": "afirmação do plano",
+    "tags": [
+      "afirmacao",
+      "numero"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE afirma que a isenção do imposto de renda para quem ganha até R$ 5.000 já está em vigor, e a apresenta como compromisso cumprido.",
+    "contexto": "Afirmação do plano sobre um fato, não promessa. A lei correspondente precisa ser conferida no Planalto antes de o trecho virar fato.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 19",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=19",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-saude-001",
+    "candidato": "flavio",
+    "tema": "saude",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê contratar serviços e exames da rede privada nos horários ociosos, para ampliar o atendimento sem construir estrutura nova.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O plano justifica a medida com a existência de aparelhos parados enquanto pacientes esperam por exames. O trecho não fixa prazo.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 37",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=37",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-21",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-saude-001",
+    "candidato": "lula",
+    "tema": "saude",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê que hospitais privados sigam oferecendo exames e cirurgias ao SUS em troca de créditos financeiros ou de abatimento de dívidas.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O item aparece no parágrafo sobre um programa de atenção especializada que o plano apresenta como já em andamento. O trecho não fixa prazo.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 37",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=37",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-21",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-saude-002",
+    "candidato": "flavio",
+    "tema": "saude",
+    "ordem": 2,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê implantar o prontuário eletrônico único.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O índice do documento remete à p. 25; a frase está na p. 26. O trecho não fixa prazo nem diz como o prontuário se integraria aos sistemas existentes.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 26",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=26",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-saude-002",
+    "candidato": "lula",
+    "tema": "saude",
+    "ordem": 2,
+    "tipo": "posicao",
+    "etiqueta": "afirmação do plano",
+    "tags": [
+      "afirmacao"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE apresenta um programa de atenção especializada, já em andamento, como resposta ao acesso a consultas, exames e cirurgias com especialistas, que o documento promete garantir com qualidade e agilidade.",
+    "contexto": "O plano cita volumes de 2025 de cirurgias, consultas e exames do programa, autodeclarados; conferir no Ministério da Saúde antes de o trecho virar fato.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 37",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=37",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-educacao-001",
+    "candidato": "flavio",
+    "tema": "educacao",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê priorizar o método fônico na alfabetização, que ensina a criança a relacionar sons e letras.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O documento sustenta a escolha com uma alegação de superioridade científica, deixada fora do trecho por ser juízo do próprio plano.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 35",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=35",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-21",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-educacao-001",
+    "candidato": "lula",
+    "tema": "educacao",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa",
+      "numero"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê chegar a 80% das crianças alfabetizadas na idade certa.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O plano vincula a meta a um pacto já firmado com estados e municípios e afirma que o índice foi de 66% em 2025; conferir no indicador oficial.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 31",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=31",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-21",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-educacao-002",
+    "candidato": "flavio",
+    "tema": "educacao",
+    "ordem": 2,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê financiar a educação com repasses vinculados a metas de aprendizagem.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. Mesma seção da proposta do método fônico. O trecho não diz quais metas nem qual parcela dos repasses ficaria vinculada.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 35",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=35",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-educacao-002",
+    "candidato": "lula",
+    "tema": "educacao",
+    "ordem": 2,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa",
+      "numero"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê 111 novos institutos federais, com campi em 106 municípios de todos os estados.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O trecho não fixa prazo nem orçamento.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 33",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=33",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-seguranca-001",
+    "candidato": "flavio",
+    "tema": "seguranca",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê declarar PCC, CV, milícias e todas as outras facções criminosas como organizações narcoterroristas.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. No mesmo item, o plano prevê bloquear ativos e desarticular a lavagem de dinheiro ligada às facções. O trecho não diz por qual instrumento a declaração seria feita.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 13",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=13",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-21",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-seguranca-001",
+    "candidato": "lula",
+    "tema": "seguranca",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê combater o crime organizado pela asfixia financeira, desarticulando as estruturas econômicas e financeiras dessas organizações.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. O plano afirma que o enfrentamento deve ocorrer nos marcos da Constituição e do Estado Democrático de Direito. O trecho não fixa prazo.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 27",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=27",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-21",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-21",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-seguranca-002",
+    "candidato": "flavio",
+    "tema": "seguranca",
+    "ordem": 2,
+    "tipo": "posicao",
+    "etiqueta": "posição",
+    "tags": [
+      "posicao"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE afirma que bandido armado com fuzil na mão será abatido pelas forças de segurança.",
+    "contexto": "Frase do próprio plano, no capítulo de segurança, no mesmo parágrafo da proposta sobre as facções. O documento não diz por qual norma isso se daria.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 13",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=13",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-seguranca-002",
+    "candidato": "lula",
+    "tema": "seguranca",
+    "ordem": 2,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê criar um Ministério da Segurança Pública depois de aprovada uma proposta de emenda constitucional sobre segurança pública que, segundo o documento, já tramita no Congresso.",
+    "contexto": "A proposta de emenda é apresentada como já enviada ao Congresso (p. 27); o ministério é condicionado à aprovação dela (p. 30). Conferir a tramitação antes de o trecho virar fato.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 30",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=30",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-22",
+        "primaria": true
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-justica-001",
+    "candidato": "flavio",
+    "tema": "justica",
+    "ordem": 1,
+    "tipo": "feito",
+    "etiqueta": "investigação e denúncia",
+    "tags": [
+      "investigacao",
+      "denuncia"
+    ],
+    "afirmacao": "{Quem} foi denunciado em novembro de 2020 pelo Ministério Público estadual por peculato, lavagem de dinheiro e organização criminosa, num caso sobre o suposto desvio de parte dos salários de assessores do seu gabinete de deputado estadual, investigado desde 2018 a partir de um relatório do Coaf; ele nega as acusações.",
+    "contexto": "Fatos relativos ao mandato de deputado estadual, entre 2010 e 2014, segundo o Ministério Público. Denúncia é a acusação formal que pede a abertura de ação penal; não é condenação.",
+    "data": "2020-11",
+    "fontes": [
+      {
+        "titulo": "STJ anula quebra de sigilo bancário e fiscal de Flávio Bolsonaro no caso das «rachadinhas» (23/fev/2021)",
+        "url": "https://diariodonordeste.verdesmares.com.br/politica/stj-anula-quebra-de-sigilo-bancario-e-fiscal-de-flavio-bolsonaro-no-caso-das-rachadinhas-1.3051176",
+        "veiculo": "Diário do Nordeste",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 23/fev/2021"
+      },
+      {
+        "titulo": "Gilmar nega pedido para reabrir ação contra Flávio por «rachadinha» (27/fev/2025)",
+        "url": "https://www.poder360.com.br/poder-justica/gilmar-nega-pedido-para-reabrir-acao-contra-flavio-por-rachadinha/",
+        "veiculo": "Poder360",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 27/fev/2025"
+      },
+      {
+        "titulo": "Gilmar Mendes nega reabertura do caso das «rachadinhas» de Flávio Bolsonaro (27/fev/2025)",
+        "url": "https://www.gazetadopovo.com.br/republica/gilmar-mendes-nega-reabertura-rachadinhas-flavio-bolsonaro/",
+        "veiculo": "Gazeta do Povo",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 27/fev/2025"
+      },
+      {
+        "titulo": "Rachadinha: o que aconteceu com o caso que envolve filho de Bolsonaro (13/out/2022)",
+        "url": "https://www.correiobraziliense.com.br/politica/2022/10/5043990-rachadinha-o-que-aconteceu-com-caso-que-envolve-filho-de-bolsonaro.html",
+        "veiculo": "Correio Braziliense",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 13/out/2022"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-justica-001",
+    "candidato": "lula",
+    "tema": "justica",
+    "ordem": 1,
+    "tipo": "feito",
+    "etiqueta": "denúncias e condenações",
+    "tags": [
+      "denuncia",
+      "condenacao"
+    ],
+    "afirmacao": "{Quem} foi condenado em primeira instância em 12 de julho de 2017, por corrupção passiva e lavagem de dinheiro, a 9 anos e 6 meses de prisão, num processo sobre um imóvel no litoral; em 24 de janeiro de 2018, o tribunal de segunda instância manteve a condenação e elevou a pena a 12 anos e 1 mês. Preso em 7 de abril de 2018, ficou 580 dias na prisão; em 1º de setembro de 2018, o TSE indeferiu o registro da sua candidatura por 6 votos a 1, com base na Lei da Ficha Limpa. Em 6 de fevereiro de 2019, foi condenado em outro processo, sobre reformas num sítio, a 12 anos e 11 meses de prisão, pelos mesmos crimes.",
+    "contexto": "As duas condenações foram anuladas em 2021 (trechos 2 e 3 deste caderno). Ele negou as acusações e disse ser alvo de perseguição política.",
+    "data": "2018-01-24",
+    "fontes": [
+      {
+        "titulo": "Ex-presidente Lula completa 1 ano na prisão por tríplex no Guarujá (07/abr/2019)",
+        "url": "https://www.poder360.com.br/justica/ex-presidente-lula-completa-1-ano-na-prisao-por-triplex-no-guaruja/",
+        "veiculo": "Poder360",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 07/abr/2019"
+      },
+      {
+        "titulo": "Lulinha, Luchsinger e Lava Jato: o que realmente pesa contra Lula? — BBC News Brasil (22/out/2026)",
+        "url": "https://www.terra.com.br/noticias/brasil/lulinha-luchsinger-e-lava-jato-o-que-realmente-pesa-contra-lula,0f3c73baccb12f978898ad9dc872a668276du980.html",
+        "veiculo": "BBC News Brasil, via Terra",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 22/out/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-justica-002",
+    "candidato": "flavio",
+    "tema": "justica",
+    "ordem": 2,
+    "tipo": "feito",
+    "etiqueta": "anulação de provas",
+    "tags": [
+      "anulacao"
+    ],
+    "afirmacao": "Em 23 de fevereiro de 2021, a Quinta Turma do STJ declarou, por maioria, a nulidade da quebra de sigilo bancário e fiscal {de quem} nesse caso, por falta de fundamentação da decisão judicial que a autorizou.",
+    "contexto": "A decisão atinge as provas obtidas com a quebra; não julga o mérito da acusação.",
+    "data": "2021-02-23",
+    "fontes": [
+      {
+        "titulo": "STJ anula quebra de sigilo bancário e fiscal de Flávio Bolsonaro no caso das «rachadinhas» (23/fev/2021)",
+        "url": "https://diariodonordeste.verdesmares.com.br/politica/stj-anula-quebra-de-sigilo-bancario-e-fiscal-de-flavio-bolsonaro-no-caso-das-rachadinhas-1.3051176",
+        "veiculo": "Diário do Nordeste",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 23/fev/2021"
+      },
+      {
+        "titulo": "STJ anula quebra de sigilo bancário de Flávio Bolsonaro (23/fev/2021)",
+        "url": "https://www.migalhas.com.br/quentes/340746/stj-anula-quebra-de-sigilo-bancario-de-flavio-bolsonaro",
+        "veiculo": "Migalhas",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 23/fev/2021"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-justica-002",
+    "candidato": "lula",
+    "tema": "justica",
+    "ordem": 2,
+    "tipo": "feito",
+    "etiqueta": "anulação por incompetência",
+    "tags": [
+      "anulacao"
+    ],
+    "afirmacao": "Em 8 de março de 2021, um ministro do STF declarou que a vara federal que julgou {pessoa} não era competente para quatro ações penais contra ele, anulou os atos decisórios, inclusive o recebimento das denúncias, e remeteu os processos à Justiça Federal do Distrito Federal; em 15 de abril de 2021, o colegiado do STF confirmou a decisão.",
+    "contexto": "A nulidade alcança os atos decisórios; o juízo competente decidiria sobre aproveitar os atos de instrução. O que aconteceu depois com cada ação está no trecho 5.",
+    "data": "2021-03-08",
+    "fontes": [
+      {
+        "titulo": "Fachin anula todos os processos contra Lula na Lava Jato de Curitiba (08/mar/2021)",
+        "url": "https://jovempan.com.br/?p=114214",
+        "veiculo": "Jovem Pan",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 08/mar/2021"
+      },
+      {
+        "titulo": "STF confirma suspeição de Sergio Moro na ação do triplex do Guarujá (23/jun/2021)",
+        "url": "https://noticias.stf.jus.br/postsnoticias/stf-confirma-suspeicao-de-sergio-moro-na-acao-do-triplex-do-guaruja/",
+        "veiculo": "STF",
+        "acessado_em": "2026-10-22",
+        "primaria": true,
+        "anonimo": "Notícia do STF de 23/jun/2021"
+      },
+      {
+        "titulo": "Fachin anula as condenações de Lula na Lava Jato (08/mar/2021)",
+        "url": "https://www.migalhas.com.br/quentes/341380/fachin-anula-as-condenacoes-de-lula-na-lava-jato",
+        "veiculo": "Migalhas",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 08/mar/2021"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-justica-003",
+    "candidato": "flavio",
+    "tema": "justica",
+    "ordem": 3,
+    "tipo": "feito",
+    "etiqueta": "arquivamento",
+    "tags": [
+      "arquivamento"
+    ],
+    "afirmacao": "Em maio de 2022, a Corte Especial do Tribunal de Justiça do estado arquivou a denúncia contra {pessoa} nesse caso, com base na decisão do STJ que anulou decisões e provas da investigação; em 26 de fevereiro de 2025, um ministro do STF negou recursos do Ministério Público para reabrir o caso.",
+    "contexto": "Arquivamento por anulação de provas não é absolvição: a acusação não chegou a ser julgada no mérito. Segundo a mesma fonte, a tramitação atual está sob segredo de justiça.",
+    "data": "2025-02-26",
+    "fontes": [
+      {
+        "titulo": "Gilmar nega pedido para reabrir ação contra Flávio por «rachadinha» (27/fev/2025)",
+        "url": "https://www.poder360.com.br/poder-justica/gilmar-nega-pedido-para-reabrir-acao-contra-flavio-por-rachadinha/",
+        "veiculo": "Poder360",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 27/fev/2025"
+      },
+      {
+        "titulo": "Gilmar Mendes nega reabertura do caso das «rachadinhas» de Flávio Bolsonaro (27/fev/2025)",
+        "url": "https://www.gazetadopovo.com.br/republica/gilmar-mendes-nega-reabertura-rachadinhas-flavio-bolsonaro/",
+        "veiculo": "Gazeta do Povo",
+        "acessado_em": "2026-10-22",
+        "anonimo": "Notícia de 27/fev/2025"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-justica-003",
+    "candidato": "lula",
+    "tema": "justica",
+    "ordem": 3,
+    "tipo": "feito",
+    "etiqueta": "suspeição do juiz",
+    "tags": [
+      "anulacao"
+    ],
+    "afirmacao": "Em 23 de março de 2021, a Segunda Turma do STF declarou a suspeição, por parcialidade, do juiz que condenou {pessoa} no processo do imóvel; em 23 de junho de 2021, o Plenário manteve a decisão por 7 votos a 4, anulando todas as decisões daquele juiz no caso, inclusive as da fase anterior ao processo.",
+    "contexto": "Suspeição é juízo sobre a imparcialidade do julgador, não sobre a culpa ou a inocência do réu.",
+    "data": "2021-06-23",
+    "fontes": [
+      {
+        "titulo": "STF confirma suspeição de Sergio Moro na ação do triplex do Guarujá (23/jun/2021)",
+        "url": "https://noticias.stf.jus.br/postsnoticias/stf-confirma-suspeicao-de-sergio-moro-na-acao-do-triplex-do-guaruja/",
+        "veiculo": "STF",
+        "acessado_em": "2026-10-22",
+        "primaria": true,
+        "anonimo": "Notícia do STF de 23/jun/2021"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-22",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-justica-004",
+    "candidato": "lula",
+    "tema": "justica",
+    "ordem": 4,
+    "tipo": "feito",
+    "etiqueta": "absolvições",
+    "tags": [
+      "denuncia",
+      "absolvicao"
+    ],
+    "afirmacao": "{Quem} foi absolvido, sem recurso da acusação, em três ações: por organização criminosa, com absolvição sumária em dezembro de 2019, a pedido do próprio Ministério Público Federal; por obstrução de justiça, num caso sobre a suposta compra do silêncio de um ex-diretor de estatal; e, em 2021, por tráfico de influência, lavagem de dinheiro e organização criminosa, num caso sobre uma medida provisória que beneficiaria montadoras.",
+    "contexto": "Absolvição é julgamento de mérito: o juízo examinou a acusação e a rejeitou. As datas das duas últimas absolvições não constam nas fontes deste lote; a situação «sem recurso» é de novembro de 2022.",
+    "data": "2022-11",
+    "fontes": [
+      {
+        "titulo": "Processos que ainda restam contra Lula ficarão parados no STF — Gazeta do Povo (03/nov/2022)",
+        "url": "https://www.gazetadopovo.com.br/republica/processos-que-ainda-restam-contra-lula-ficarao-parados-no-stf/",
+        "veiculo": "Gazeta do Povo",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 03/nov/2022"
+      },
+      {
+        "titulo": "Lulinha, Luchsinger e Lava Jato: o que realmente pesa contra Lula? — BBC News Brasil (22/out/2026)",
+        "url": "https://www.terra.com.br/noticias/brasil/lulinha-luchsinger-e-lava-jato-o-que-realmente-pesa-contra-lula,0f3c73baccb12f978898ad9dc872a668276du980.html",
+        "veiculo": "BBC News Brasil, via Terra",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 22/out/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-justica-005",
+    "candidato": "flavio",
+    "tema": "justica",
+    "ordem": 4,
+    "tipo": "feito",
+    "etiqueta": "inquérito em andamento",
+    "tags": [
+      "investigacao",
+      "tramite"
+    ],
+    "afirmacao": "Desde julho de 2026, a Polícia Federal conduz, com autorização de um ministro do STF e parecer favorável da Procuradoria-Geral da República, um inquérito sobre repasses de um banqueiro, ex-controlador de um banco, ao financiamento de um filme biográfico sobre um ex-presidente: segundo a imprensa, {quem} negociou com o banqueiro um aporte de US$ 24 milhões (cerca de R$ 134 milhões), e ao menos US$ 10,6 milhões foram enviados a um fundo nos Estados Unidos ligado ao projeto. Segundo o Metrópoles, ele é investigado no inquérito, por mensagens que indicariam atuação na cobrança dos recursos; ele afirma que buscou patrocínio privado e nega irregularidades e contrapartidas. Em 15 de outubro de 2026, a PF pediu mais 90 dias de apuração.",
+    "contexto": "As suspeitas apuradas, segundo o Metrópoles, são lavagem de dinheiro, evasão de divisas, organização criminosa e corrupção ativa. Inquérito é apuração, não acusação: cabe à Procuradoria-Geral da República decidir se denuncia.",
+    "data": "2026-07",
+    "fontes": [
+      {
+        "titulo": "André Mendonça autoriza inquérito sobre repasses para «Dark Horse», filme sobre Jair Bolsonaro — Agência Estado, via O Povo (23/jul/2026)",
+        "url": "https://www.opovo.com.br/noticias/politica/2026/07/23/andre-mendonca-autoriza-inquerito-sobre-repasses-para-dark-horse-filme-sobre-jair-bolsonaro.html",
+        "veiculo": "Agência Estado, via O Povo",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 23/jul/2026"
+      },
+      {
+        "titulo": "Dark Horse: PF pede mais 90 dias para investigação sobre filme de Bolsonaro — Metrópoles (16/out/2026)",
+        "url": "https://www.metropoles.com/colunas/manoela-alcantara/dark-horse-pf-pede-mais-90-dias-para-investigacao-sobre-filme-de-bolsonaro",
+        "veiculo": "Metrópoles",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 16/out/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-justica-005",
+    "candidato": "lula",
+    "tema": "justica",
+    "ordem": 5,
+    "tipo": "feito",
+    "etiqueta": "encerramentos",
+    "tags": [
+      "arquivamento"
+    ],
+    "afirmacao": "As demais ações contra {pessoa} foram encerradas sem julgamento de mérito: o processo do imóvel no litoral foi extinto por prescrição, a pedido do Ministério Público Federal, depois de transferido para Brasília; a nova denúncia do caso do sítio foi rejeitada em janeiro de 2022, por insuficiência de provas; outros casos foram arquivados entre 2020 e 2021; e, em 17 de fevereiro de 2023, um ministro do STF encerrou as três últimas ações abertas — duas sobre doações e um terreno para um instituto ligado a ele, por nulidade das provas e falta de justa causa, e uma sobre a compra de caças, por falta de suporte idôneo. Em 22 de outubro de 2026, segundo a BBC News Brasil, ele não responde a acusações na Justiça.",
+    "contexto": "Extinção por prescrição, rejeição de denúncia e trancamento por nulidade de provas encerram o caso sem dizer se a acusação era verdadeira. Inquéritos de 2026 sobre pessoas próximas a ele não o têm como investigado, segundo a mesma fonte, e ficam fora deste caderno.",
+    "data": "2023-02",
+    "fontes": [
+      {
+        "titulo": "Processos que ainda restam contra Lula ficarão parados no STF — Gazeta do Povo (03/nov/2022)",
+        "url": "https://www.gazetadopovo.com.br/republica/processos-que-ainda-restam-contra-lula-ficarao-parados-no-stf/",
+        "veiculo": "Gazeta do Povo",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 03/nov/2022"
+      },
+      {
+        "titulo": "Lewandowski encerra 3 investigações contra Lula — Poder360 (18/fev/2023)",
+        "url": "https://www.poder360.com.br/justica/lewandowski-encerra-3-investigacoes-contra-lula/",
+        "veiculo": "Poder360",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 18/fev/2023"
+      },
+      {
+        "titulo": "Lulinha, Luchsinger e Lava Jato: o que realmente pesa contra Lula? — BBC News Brasil (22/out/2026)",
+        "url": "https://www.terra.com.br/noticias/brasil/lulinha-luchsinger-e-lava-jato-o-que-realmente-pesa-contra-lula,0f3c73baccb12f978898ad9dc872a668276du980.html",
+        "veiculo": "BBC News Brasil, via Terra",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 22/out/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-meio-ambiente-001",
+    "candidato": "flavio",
+    "tema": "meio-ambiente",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa",
+      "numero"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE fixa a meta de zerar o desmatamento ilegal até 2029.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. A meta é sobre o desmatamento ilegal, não sobre todo desmatamento; o plano a apresenta como retomada de um compromisso do governo anterior. Lido na p. 58 do PDF do plano; dois veículos independentes reproduzem o trecho.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 58",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=58",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — p. 58"
+      },
+      {
+        "titulo": "Meio ambiente e energia: veja propostas de Flávio na íntegra (16/out/2026)",
+        "url": "https://sbtnews.sbt.com.br/noticia/eleicoes/meio-ambiente-e-energia-veja-propostas-de-flavio-na-integra",
+        "veiculo": "SBT News",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 16/out/2026"
+      },
+      {
+        "titulo": "Veja os planos de governo de Flávio e Lula para meio ambiente e clima — Agência Brasil (13/out/2026)",
+        "url": "https://www.acessa.com/noticias/2026/10/342165-veja-os-planos-de-governo-de-flavio-e-lula-para-meio-ambiente-e-clima.html",
+        "veiculo": "Agência Brasil, via Acessa",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/out/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-meio-ambiente-001",
+    "candidato": "lula",
+    "tema": "meio-ambiente",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa",
+      "numero"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE reafirma a meta de «desmatamento líquido zero até 2030».",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. «Líquido zero» é saldo: admite desmatamento compensado por restauração, e não é o mesmo que desmatamento zero; a imprensa resume como «desmatamento zero». Lido na p. 70 do PDF do plano, que fala em «meta que reafirmamos».",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 70",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=70",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — p. 70"
+      },
+      {
+        "titulo": "Veja os planos de governo de Flávio e Lula para meio ambiente e clima — Agência Brasil (13/out/2026)",
+        "url": "https://www.acessa.com/noticias/2026/10/342165-veja-os-planos-de-governo-de-flavio-e-lula-para-meio-ambiente-e-clima.html",
+        "veiculo": "Agência Brasil, via Acessa",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/out/2026"
+      },
+      {
+        "titulo": "Lula e Flávio Bolsonaro divergem sobre meio ambiente; veja propostas (13/out/2026)",
+        "url": "https://istoe.com.br/lula-flavio-bolsonaro-propostas-meio-ambiente-2026",
+        "veiculo": "IstoÉ",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/out/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-meio-ambiente-002",
+    "candidato": "flavio",
+    "tema": "meio-ambiente",
+    "ordem": 2,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê permitir a exploração de gás não convencional (fracking), «com responsabilidade ambiental e cumprindo a lei», e transformar o país em potência de biocombustíveis — etanol, biodiesel, HVO, SAF e biogás.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. Lido nas pp. 52 e 53 do PDF do plano; dois veículos independentes reproduzem os dois pontos. O trecho não fixa prazo.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — pp. 52–53",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=52",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — pp. 52–53"
+      },
+      {
+        "titulo": "Meio ambiente e energia: veja propostas de Flávio na íntegra (16/out/2026)",
+        "url": "https://sbtnews.sbt.com.br/noticia/eleicoes/meio-ambiente-e-energia-veja-propostas-de-flavio-na-integra",
+        "veiculo": "SBT News",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 16/out/2026"
+      },
+      {
+        "titulo": "EUA, tesouraço e presídios: o que prevê o plano de governo de Flávio (14/ago/2026)",
+        "url": "https://www.congressoemfoco.com.br/noticia/121271/eua--tesouraco-e-presidios-o-que-preve-o-plano-de-governo-de-flavio",
+        "veiculo": "Congresso em Foco",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 14/ago/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-meio-ambiente-002",
+    "candidato": "lula",
+    "tema": "meio-ambiente",
+    "ordem": 2,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE diz que o combate à mineração ilegal «continuará sendo prioridade estratégica» e prevê integrar a detecção do desmatamento às ações de segurança, com as Forças Armadas nas fronteiras da Amazônia e cooperação com os países do Tratado de Cooperação Amazônica.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. Lido na p. 29 do PDF do plano. O trecho não fixa prazo nem meta numérica.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 29",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=29",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — p. 29"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-geopolitica-001",
+    "candidato": "flavio",
+    "tema": "geopolitica",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE prevê «retomar o cronograma interrompido de adesão à OCDE, incluindo o fim gradual do IOF sobre o câmbio», apresentado como condição obrigatória dessa adesão.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. Lido na p. 63 do PDF do plano, que diz que a adesão exige convergir normas aos padrões internacionais e melhora a governança das estatais; três veículos independentes reproduzem o ponto.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 63",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=63",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — p. 63"
+      },
+      {
+        "titulo": "Plano de Flávio ignora Mercosul e quer reaproximar Israel (13/ago/2026)",
+        "url": "https://sbtnews.sbt.com.br/noticia/politica/plano-de-flavio-ignora-mercosul-e-quer-reaproximar-israel",
+        "veiculo": "SBT News",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/ago/2026"
+      },
+      {
+        "titulo": "Lula e Flávio apresentam propostas distintas para política externa — Agência Brasil (13/out/2026)",
+        "url": "https://www.dgabc.com.br/Noticia/4352504/lula-e-flavio-apresentam-propostas-distintas-para-politica-externa",
+        "veiculo": "Agência Brasil, via Diário do Grande ABC",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/out/2026"
+      },
+      {
+        "titulo": "EUA, tesouraço e presídios: o que prevê o plano de governo de Flávio (14/ago/2026)",
+        "url": "https://www.congressoemfoco.com.br/noticia/121271/eua--tesouraco-e-presidios-o-que-preve-o-plano-de-governo-de-flavio",
+        "veiculo": "Congresso em Foco",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 14/ago/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-geopolitica-001",
+    "candidato": "lula",
+    "tema": "geopolitica",
+    "ordem": 1,
+    "tipo": "promessa",
+    "etiqueta": "promessa",
+    "tags": [
+      "promessa"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE diz: «Seguiremos aprofundando o Mercosul e os espaços de integração regional», e prevê «aprofundar a aproximação geopolítica com o BRICS e com o Sul Global, bem como com o G20» e as relações com a África.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. Lido nas pp. 80 e 81 do PDF do plano, que chama o Mercosul de «principal plataforma de integração» da América do Sul; dois veículos independentes reproduzem o ponto. O trecho não fixa prazo.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — pp. 80–81",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=80",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — pp. 80–81"
+      },
+      {
+        "titulo": "Lula e Flávio apresentam propostas distintas para política externa — Agência Brasil (13/out/2026)",
+        "url": "https://www.dgabc.com.br/Noticia/4352504/lula-e-flavio-apresentam-propostas-distintas-para-politica-externa",
+        "veiculo": "Agência Brasil, via Diário do Grande ABC",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/out/2026"
+      },
+      {
+        "titulo": "Após tarifaço, plano de Lula cita «soberania» 30 vezes (08/ago/2026)",
+        "url": "https://sbtnews.sbt.com.br/noticia/politica/apos-tarifaco-plano-de-lula-cita-soberania-30-vezes",
+        "veiculo": "SBT News",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 08/ago/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "flavio-geopolitica-002",
+    "candidato": "flavio",
+    "tema": "geopolitica",
+    "ordem": 2,
+    "tipo": "posicao",
+    "etiqueta": "posição",
+    "tags": [
+      "posicao"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE propõe uma diplomacia «guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia», «sem escolher amigos por afinidade ideológica» — «Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos» — e prevê reverter o desgaste das relações com Argentina, Estados Unidos e Israel.",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. Lido na p. 62 do PDF do plano; três veículos independentes reproduzem a frase e a lista de países. A palavra «Mercosul» não aparece no documento, o que o SBT também registra.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — p. 62",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pl/@@display-file/file/proposta-pl.pdf#page=62",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — p. 62"
+      },
+      {
+        "titulo": "Plano de Flávio ignora Mercosul e quer reaproximar Israel (13/ago/2026)",
+        "url": "https://sbtnews.sbt.com.br/noticia/politica/plano-de-flavio-ignora-mercosul-e-quer-reaproximar-israel",
+        "veiculo": "SBT News",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/ago/2026"
+      },
+      {
+        "titulo": "Lula e Flávio apresentam propostas distintas para política externa — Agência Brasil (13/out/2026)",
+        "url": "https://www.dgabc.com.br/Noticia/4352504/lula-e-flavio-apresentam-propostas-distintas-para-politica-externa",
+        "veiculo": "Agência Brasil, via Diário do Grande ABC",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 13/out/2026"
+      },
+      {
+        "titulo": "EUA, tesouraço e presídios: o que prevê o plano de governo de Flávio (14/ago/2026)",
+        "url": "https://www.congressoemfoco.com.br/noticia/121271/eua--tesouraco-e-presidios-o-que-preve-o-plano-de-governo-de-flavio",
+        "veiculo": "Congresso em Foco",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 14/ago/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
+  },
+  {
+    "id": "lula-geopolitica-002",
+    "candidato": "lula",
+    "tema": "geopolitica",
+    "ordem": 2,
+    "tipo": "posicao",
+    "etiqueta": "posição",
+    "tags": [
+      "posicao"
+    ],
+    "afirmacao": "O plano de governo {quem} registrado no TSE diz que o país «deve reafirmar sua soberania com serenidade, criatividade, firmeza e espírito de cooperação», com um desenvolvimento «baseado nos nossos interesses, e não nos interesses de outras potências».",
+    "contexto": "Proposta apresentada ao TSE pela candidatura, nos termos da Lei 9.504/1997 (art. 11, § 1º, IX), e não ato de governo. Lido nas pp. 8 e 14 do PDF do plano; o SBT contou a palavra «soberania» 30 vezes no documento.",
+    "data": "2026-08",
+    "fontes": [
+      {
+        "titulo": "Plano de governo de {nome} — pp. 8 e 14",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/arquivos/proposta-pt/@@display-file/file/proposta-pt.pdf#page=14",
+        "veiculo": "TSE",
+        "acessado_em": "2026-10-23",
+        "primaria": true,
+        "anonimo": "Plano de governo — pp. 8 e 14"
+      },
+      {
+        "titulo": "Após tarifaço, plano de Lula cita «soberania» 30 vezes (08/ago/2026)",
+        "url": "https://sbtnews.sbt.com.br/noticia/politica/apos-tarifaco-plano-de-lula-cita-soberania-30-vezes",
+        "veiculo": "SBT News",
+        "acessado_em": "2026-10-23",
+        "anonimo": "Notícia de 08/ago/2026"
+      }
+    ],
+    "status": "beta",
+    "revisado_por": "ia",
+    "buscado_em": "2026-10-23",
+    "atualizado_em": "2026-10-23"
   }
 ]

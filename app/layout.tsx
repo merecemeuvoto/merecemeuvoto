@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import type { ReactNode } from "react";
+import { temasComparados } from "@/lib/fatos";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -19,14 +20,14 @@ export const metadata: Metadata = {
     template: "%s · ¿Merece Meu Voto?",
   },
   description:
-    "Fatos dos dois finalistas lado a lado, com a fonte em cada card. Sem dizer em quem votar.",
+    "Os planos e o histórico dos dois finalistas lado a lado, às cegas, com a fonte em cada trecho. Sem dizer em quem votar.",
   openGraph: {
     type: "website",
     locale: "pt_BR",
     siteName: "¿Merece Meu Voto?",
     title: "¿Merece Meu Voto? — A pausa antes do voto.",
     description:
-      "Fatos dos dois finalistas lado a lado, com a fonte em cada card. Sem dizer em quem votar.",
+      "Os planos e o histórico dos dois finalistas lado a lado, às cegas, com a fonte em cada trecho. Sem dizer em quem votar.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Antes de decidir, uma pausa." }],
   },
   twitter: { card: "summary_large_image" },
@@ -49,7 +50,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {children}
         <footer>
           <span>merecemeuvoto.com.br</span>
-          <span>em construção · 2º turno · 25/out/2026</span>
+          <span>
+            {temasComparados().length > 0 ? "" : "em construção · "}2º turno · 25/out/2026
+          </span>
+          <span className="lema-rodape">Ninguém chega aqui errado; chega com mais a descobrir.</span>
         </footer>
       </body>
     </html>

@@ -1,6 +1,6 @@
 {
   "name": "merecemeuvoto-site",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-beta.1",
   "private": true,
   "description": "¿Merece Meu Voto? — a pausa antes do voto. Comparador de fatos dos candidatos, com fonte em cada card.",
   "author": "Gabriel Albrecht Fitarelli",
